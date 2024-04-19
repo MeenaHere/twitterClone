@@ -1,14 +1,16 @@
 import ProfileInfo from "./ProfileInfo";
 import "bootstrap/dist/css/bootstrap.css";
+import Trends from "./Trends";
+import Tweets from "./Tweets";
 
 function Profile() {
   return (
     <div className="container">
-      <div className="">
+      <div className="row">
         <ProfileInfo />
-        {/* Add Trend component here */}
+        <Trends />
       </div>
-      {/* Add Tweet component here */}
+      <Tweets />
     </div>
   );
 }

@@ -1,0 +1,37 @@
+.search-input-container .search-results {
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.search-input-container .suggestion-line {
+    display: flex;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.search-input-container .suggestion-line:hover {
+    background-color: #f5f5f5;
+}
+
+.search-input {
+    padding: 6px 6px 6px 20px;
+}
+
+/* .search-icon {
+    tran
+} */
+
+.close-button {
+    color: rgb(29, 155, 240);
+}
+
+.suggestion-line.active {
+    background-color: #f5f5f5;
+}

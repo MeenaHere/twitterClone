@@ -12,6 +12,8 @@ function SearchField() {
     const [searchData, setSearchData] = useState([]);
     const [select, setSelect] = useState(-1);
 
+
+
     const handleChange = e => {
         setQuery(e.target.value)
     }
@@ -59,18 +61,10 @@ function SearchField() {
     return (
         <section className="container-right">
             <div className="search-input-container">
-                <span className="icons">
-                    <div className='search-icon'>
-                        <BsSearch />
 
-                    </div>
-                    {query && ( // Render close button only if query is not empty
-                        <div className="close-button">
-                            <BsXCircleFill onClick={handleClose} />
-                        </div>
-                    )}
-                </span>
-
+                <div className='search-icon'>
+                    <BsSearch />
+                </div>
 
                 <input
                     className='search-input'
@@ -79,8 +73,14 @@ function SearchField() {
                     value={query}
                     onChange={handleChange}
                     onKeyDown={handleKeyDown}
+
                 />
                 {/* <button onClick={handleSearch}>Search</button> */}
+                {query && (
+                    <div className="close-button">
+                        <BsXCircleFill onClick={handleClose} />
+                    </div>
+                )}
 
                 <div className='search-results'>
                     {searchData && searchData.length > 0 ? (

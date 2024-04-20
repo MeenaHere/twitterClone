@@ -1,11 +1,11 @@
-import ProfileInfo from "./ProfileInfo";
+/* import ProfileInfo from "./ProfileInfo";
 import "bootstrap/dist/css/bootstrap.css";
-
+ */
 function Profile() {
   return (
     <div className="container">
       <div className="">
-        <ProfileInfo />
+        {/* <ProfileInfo /> */}
         {/* Add Trend component here */}
       </div>
       {/* Add Tweet component here */}

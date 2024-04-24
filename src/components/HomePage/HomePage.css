@@ -7,38 +7,6 @@
     padding: 0 10px;
 }
 
-.feed-area {
-    flex: 0.6;
-    overflow-y: scroll;
-    /*  flex: auto; */
-    /* border: 1.5px solid rgb(52, 105, 228); */
-
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.feed-area::-webkit-scrollbar {
-    display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.feed-area {
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    scrollbar-width: none;
-    /* Firefox */
-}
-
-.search-trends {
-    flex: 0.4;
-    border: 1px solid greenyellow;
-
-}
-
-.sidebar {
-    flex: 0.28;
-    border-right: 1.5px solid rgba(208, 208, 208, 0.441);
-
-}
 
 a {
     text-decoration: none;

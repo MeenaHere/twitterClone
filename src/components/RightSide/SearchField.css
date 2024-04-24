@@ -72,14 +72,19 @@
     color: rgb(29, 155, 240);
 }
 
-.container-right {
-
+.search-container {
     margin: 0px 30px;
     width: 340px;
     padding: 3px;
     /* max-width: fit-content; */
     background-color: rgba(185, 202, 211, 0.24);
     border-radius: 30px;
+
+}
+
+.container-right {
+    flex: 0.4;
+    border-left: 1.5px solid rgba(208, 208, 208, 0.441);
 
 }
 

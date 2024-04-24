@@ -19,7 +19,7 @@ function Feed() {
             })
             .catch(error => console.error('Error fetching posts:', error));
     }, []);
-
+    console.log('Posts:', posts);
     return (
         <div className="feed">
             <div className="feed-header">
@@ -38,8 +38,9 @@ function Feed() {
             </div>
             <h1>Feed</h1>
             <div>
+
                 {posts.map(post => (
-                    <Post key={post.id} post={post} />
+                    <Post key={post._id} post={post} />
                 ))}
             </div>
         </div>

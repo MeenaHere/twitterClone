@@ -68,47 +68,56 @@ function SearchField() {
 
     return (
         <section className="container-right">
-            <div className="search-input-container">
+            <div className="search-container">
+                <div className="search-input-container">
 
-                <div className='search-icon'>
-                    <BsSearch />
-                </div>
-
-                <input
-                    className='search-input'
-                    type="text"
-                    placeholder='Search'
-                    value={query}
-                    onChange={handleChange}
-                    onKeyDown={handleKeyDown}
-
-                />
-                {/* <button onClick={handleSearch}>Search</button> */}
-                {query && (
-                    <div className="close-button">
-                        <BsXCircleFill onClick={handleClose} />
+                    <div className='search-icon'>
+                        <BsSearch />
                     </div>
-                )}
 
-                <div className='search-results'>
-                    {isSearchActive && (
-                        searchData.length > 0 ? (
-                            searchData.map((data, index) => (
-                                <a
-                                    href={data.url}
-                                    key={index}
-                                    target='_blank'
-                                    className={select === index ? 'suggestion-line active' : 'suggestion-line'}
-                                >
-                                    {data.fullName}
-                                </a>
-                            ))
-                        ) : (
-                            <p>Try searching for people, lists, or keywords</p>
-                        )
+                    <input
+                        className='search-input'
+                        type="text"
+                        placeholder='Search'
+                        value={query}
+                        onChange={handleChange}
+                        onKeyDown={handleKeyDown}
+
+                    />
+                    {/* <button onClick={handleSearch}>Search</button> */}
+                    {query && (
+                        <div className="close-button">
+                            <BsXCircleFill onClick={handleClose} />
+                        </div>
                     )}
-                </div>
 
+                    <div className='search-results'>
+                        {isSearchActive && (
+                            searchData.length > 0 ? (
+                                searchData.map((data, index) => (
+                                    <a
+                                        href={data.url}
+                                        key={index}
+                                        target='_blank'
+                                        className={select === index ? 'suggestion-line active' : 'suggestion-line'}
+                                    >
+                                        {data.fullName}
+                                    </a>
+                                ))
+                            ) : (
+                                <p>Try searching for people, lists, or keywords</p>
+                            )
+                        )}
+                    </div>
+
+                </div>
+            </div>
+
+            <div>
+                {/* Premium */}
+            </div>
+            <div>
+                {/* Trends */}
             </div>
         </section>
     )

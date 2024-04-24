@@ -11,17 +11,25 @@ function SearchField() {
     const [query, setQuery] = useState("");
     const [searchData, setSearchData] = useState([]);
     const [select, setSelect] = useState(-1);
+    const [isSearchActive, setIsSearchActive] = useState(false);
 
 
 
     const handleChange = e => {
-        setQuery(e.target.value)
-    }
+        const value = e.target.value;
+        setQuery(value);
+        if (value === "") {
+            setSearchData([]); // Clear search results if input is empty
+            setSelect(-1); // Reset selection index
+        }
+        setIsSearchActive(value.trim() !== "");
+    };
 
     const handleClose = () => {
         setQuery("");
         setSearchData([]);
         setSelect(-1);
+        setIsSearchActive(false);
     }
     // Function that enables search with arrow keys 
     const handleKeyDown = e => {
@@ -49,9 +57,9 @@ function SearchField() {
         // replace this API with your own API endpoint
 
         if (query !== "") {
-            fetch(`https://api.github.com/search/users?q=${query}`)
+            fetch(`http://localhost:8000/api/search?q=${query}`)
                 .then(res => res.json())
-                .then(data => setSearchData(data.items))
+                .then(data => setSearchData(data))
                 .catch(error => console.error('Error fetching data:', error));
         }
 
@@ -83,19 +91,21 @@ function SearchField() {
                 )}
 
                 <div className='search-results'>
-                    {searchData && searchData.length > 0 ? (
-                        searchData.map((data, index) => (
-                            <a
-                                href={data.url}
-                                key={index}
-                                target='_blank'
-                                className={select === index ? 'suggestion-line active' : 'suggestion-line'}
-                            >
-                                {data.login}
-                            </a>
-                        ))
-                    ) : (
-                        <p>Try searching for people, lists, or keywords </p>
+                    {isSearchActive && (
+                        searchData.length > 0 ? (
+                            searchData.map((data, index) => (
+                                <a
+                                    href={data.url}
+                                    key={index}
+                                    target='_blank'
+                                    className={select === index ? 'suggestion-line active' : 'suggestion-line'}
+                                >
+                                    {data.fullName}
+                                </a>
+                            ))
+                        ) : (
+                            <p>Try searching for people, lists, or keywords</p>
+                        )
                     )}
                 </div>
 

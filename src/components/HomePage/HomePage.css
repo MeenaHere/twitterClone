@@ -1,16 +1,30 @@
 .home-page {
     display: flex;
-    height: 100vh;
-    max-width: 1300px;
+        height: 100vh;
+        max-width: 1300px;
     margin-left: auto;
     margin-right: auto;
     padding: 0 10px;
 }
 
-.feed {
+.feed-area {
     flex: auto;
+    border: 1.5px solid rgb(52, 105, 228);
+
 }
 
 .search-trends {
-    margin: 20px;
+
+    border: 1px solid greenyellow;
+
+}
+
+.sidebar {
+    border-right: 1.5px solid rgba(208, 208, 208, 0.441);
+    padding-right: 35px;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(24, 24, 24);
 }

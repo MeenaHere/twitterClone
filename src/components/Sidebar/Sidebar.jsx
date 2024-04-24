@@ -35,47 +35,63 @@ function Sidebar() {
                 onClick={() => handleSectionClick('Home')}
                 Icon={activeSection === 'Home' ? PiHouseFill : PiHouse}
                 text="Home"
-                link="/home"
+                link="/"
             />
             <SidebarProps
                 active={activeSection === 'Explore'}
                 onClick={() => handleSectionClick('Explore')}
                 Icon={activeSection === 'Explore' ? IoSearch : IoSearchSharp}
                 text="Explore"
-                link="/explore"
+            /*  link="/explore" */
             />
             <SidebarProps
                 active={activeSection === 'Notifications'}
                 onClick={() => handleSectionClick('Notifications')}
                 Icon={activeSection === 'Notifications' ? IoNotifications : IoNotificationsOutline}
                 text="Notifications"
-                link="/notifications"
+            /* link="/notifications" */
             />
             <SidebarProps
                 active={activeSection === 'Messages'}
                 onClick={() => handleSectionClick('Messages')}
                 Icon={activeSection === 'Messages' ? HiEnvelope : HiOutlineEnvelope}
                 text="Messages"
-                link="/messages"
+            /*  link="/messages" */
             />
             <SidebarProps
                 active={activeSection === 'Profile'}
                 onClick={() => handleSectionClick('Profile')}
                 Icon={activeSection === 'Profile' ? BsPersonFill : BsPerson}
                 text="Profile"
-                link="/profile"
+            /* link="/profile" */
             />
             <SidebarProps
                 active={activeSection === 'More'}
                 onClick={() => handleSectionClick('More')}
                 Icon={activeSection === 'More' ? CgMoreO : CiCircleMore}
                 text="More"
-                link="/more"
+            /* link="/more" */
+            />
+            <SidebarProps
+                active={activeSection === 'More'}
+                onClick={() => handleSectionClick('More')}
+                Icon={activeSection === 'More' ? CgMoreO : CiCircleMore}
+                text="More"
+            /* link="/more" */
+            />
+            <SidebarProps
+                active={activeSection === 'More'}
+                onClick={() => handleSectionClick('More')}
+                Icon={activeSection === 'More' ? CgMoreO : CiCircleMore}
+                text="More"
+            /* link="/more" */
             />
 
-            <div className="post-button">
-                {/* Post Button */}
-            </div>
+            {/*  <div > */}
+            <button className="sidebar-btn">
+                Post
+            </button>
+            {/*  </div> */}
             <div className="current-user">
                 {/* Logged In at the moment - avatar, full name, @username */}
             </div>

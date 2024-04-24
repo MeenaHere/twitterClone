@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 /* import TweetBox from "./TweetBox"; */
-import Post from "./Post";
 import "./Feed.css";
 import FlipMove from "react-flip-move";
+import Post from "../Post";
 
 function Feed() {
 
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:8000/posts')
+        fetch('http://localhost:8000/feed/posts')
             .then(response => response.json())
             .then(data => {
                 setPosts(data);
@@ -18,27 +18,12 @@ function Feed() {
     }, []);
 
     return (
-        <div>
-            <div className="feed">
-                <div className="feed-header">
-                    <h2>Home</h2>
-                </div>
-
-                {/* <TweetBox />  */}
-                {/* For this i need to import Post from my MongoDB (create one) */}
-                <FlipMove>
-                    {posts.map((post) => (
-                        <Post
-                            key={post.text}
-                            name={post.name}
-                            username={post.username}
-                            verified={post.verified}
-                            text={post.text}
-                            avatar={post.avatar}
-                            image={post.image}
-                        />
-                    ))}
-                </FlipMove>
+        <div className="feed">
+            <h1>Feed</h1>
+            <div>
+                {posts.map(post => (
+                    <Post key={post.id} post={post} />
+                ))}
             </div>
         </div>
     )

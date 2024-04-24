@@ -1,6 +1,7 @@
 import React from 'react'
 import Sidebar from '../Sidebar/Sidebar'
 import SearchField from '../RightSide/SearchField'
+import Feed from '../Feed/Feed'
 import './HomePage.css'
 /* import Feed from '../Feed/Feed' */
 
@@ -12,8 +13,8 @@ function HomePage() {
             <div className="sidebar">
                 <Sidebar />
             </div>
-            <div className="feed">
-                {/*  <Feed /> */}
+            <div className="feed-area">
+                <Feed />
             </div>
             <div className="search-trends">
                 <SearchField />

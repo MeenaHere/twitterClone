@@ -42,7 +42,7 @@
 
 }
 
-.search-results {
+.search-results>p {
     padding: 10px 20px;
 }
 

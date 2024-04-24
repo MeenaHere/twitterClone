@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 /* import TweetBox from "./TweetBox"; */
 import "./Feed.css";
+import { FiSettings } from "react-icons/fi";
 import FlipMove from "react-flip-move";
-import Post from "../Post";
+import Post from "./Post";
+import CreatePost from "./CreatePost";
+
 
 function Feed() {
 
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:8000/feed/posts')
+        fetch('http://localhost:4000/feed/posts')
             .then(response => response.json())
             .then(data => {
                 setPosts(data);
@@ -19,6 +22,20 @@ function Feed() {
 
     return (
         <div className="feed">
+            <div className="feed-header">
+                <div className="left-header">
+                    <h3>For you</h3>
+                </div>
+                <div className="right-header">
+                    <h3>Following</h3>
+                </div>
+                <div className="settings">
+                    {<FiSettings className="settings-icon" />}
+                </div>
+            </div>
+            <div className="create-post-container">
+                <CreatePost />
+            </div>
             <h1>Feed</h1>
             <div>
                 {posts.map(post => (

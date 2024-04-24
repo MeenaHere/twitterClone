@@ -57,7 +57,7 @@ function SearchField() {
         // replace this API with your own API endpoint
 
         if (query !== "") {
-            fetch(`http://localhost:8000/api/search?q=${query}`)
+            fetch(`http://localhost:4000/api/search?q=${query}`)
                 .then(res => res.json())
                 .then(data => setSearchData(data))
                 .catch(error => console.error('Error fetching data:', error));

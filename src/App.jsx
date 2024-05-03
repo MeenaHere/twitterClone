@@ -3,6 +3,7 @@ import Profile from "./components/profile/Profile";
 import Followers from "./components/profile/Followers";
 import Following from "./components/profile/Following";
 
+
 function App() {
   return (
     <Router>

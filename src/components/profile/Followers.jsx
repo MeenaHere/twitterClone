@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Container, Image } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import { getAllFollowers, getAllUsers } from "../../userServices";
 
 function Followers() {

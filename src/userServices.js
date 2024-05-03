@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:8000/users";
+const url = "http://localhost:4000/users";
 
 const getAllUsers = async () => {
   try {
@@ -65,10 +65,62 @@ const getAllFollowing = async (id) => {
   }
 };
 
+const postAFollower = async (id, newFollower) => {
+  try {
+    const resp = await axios.post(`${url}/${id}/followers/`, newFollower);
+    if (resp.status !== 200) {
+      throw new Error("Malfunctioning server GET request");
+    }
+    return resp.data;
+  } catch (error) {
+    console.error("Error posting data", error);
+  }
+};
+
+const postAFollowing = async (id, newFollowing) => {
+  try {
+    const resp = await axios.post(`${url}/${id}/following/`, newFollowing);
+    if (resp.status !== 200) {
+      throw new Error("Malfunctioning server POST request");
+    }
+    return resp.data;
+  } catch (error) {
+    console.error("Error posting data", error);
+  }
+};
+
+const deleteAFollower = async (id, followerId) => {
+  try {
+    const resp = await axios.delete(`${url}/${id}/followers/${followerId}`);
+    if (resp.status !== 200) {
+      throw new Error("Malfunctioning server DELETE request");
+    }
+    return resp.data;
+  } catch (error) {
+    console.error("Error deleting data", error);
+  }
+};
+
+const deleteAFollowing = async (id, followingId) => {
+  try {
+    const resp = await axios.delete(`${url}/${id}/following/${followingId}`);
+    if (resp.status !== 200) {
+      throw new Error("Malfunctioning server DELETE request");
+    }
+    return resp.data;
+  } catch (error) {
+    console.error("Error deleting data", error);
+  }
+};
+
 export {
   getAllUsers,
   getOneUser,
   updateUser,
   getAllFollowers,
   getAllFollowing,
+  postAFollower,
+  postAFollowing,
+  deleteAFollower,
+  deleteAFollowing,
 };

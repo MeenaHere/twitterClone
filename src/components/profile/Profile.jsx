@@ -2,7 +2,6 @@ import ProfileInfo from "./ProfileInfo";
 import "bootstrap/dist/css/bootstrap.css";
 import { Col } from "react-bootstrap";
 import Trends from "./Trends";
-import Tweets from "./Tweets";
 import { useEffect, useState } from "react";
 
 function Profile() {
@@ -10,7 +9,7 @@ function Profile() {
 
   useEffect(() => {
     const handleResize = () => {
-      // Check if screen width falls within tablet size range (768px
+      // Check if screen width falls within tablet size range (768px) to hide the trend component on samll screen
       setScreenSize(window.innerWidth <= 768);
     };
 
@@ -31,7 +30,6 @@ function Profile() {
         </Col>
         <Col md={3}>{!screenSize && <Trends />}</Col>
       </div>
-      <Tweets />
     </div>
   );
 }

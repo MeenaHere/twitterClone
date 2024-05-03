@@ -95,7 +95,7 @@ function ProfileInfo() {
           <div className="d-flex justify-content-between">
             <Image
               src="\cover1.jpeg"
-              alt="profile phot"
+              alt="profile photo"
               style={{
                 marginTop: "-4rem",
                 marginLeft: "1rem",

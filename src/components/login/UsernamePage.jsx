@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Username from "./Username";
 
 const UsernamePage = ({ onNext }) => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState(""); // Change from email to username
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -16,7 +16,9 @@ const UsernamePage = ({ onNext }) => {
     <div>
       <h2>Enter Username</h2>
       <Username value={username} onChange={handleUsernameChange} />
-      <button onClick={handleNext}>Next</button>
+      <button className="btn btn-primary" onClick={handleNext}>
+        Next
+      </button>
     </div>
   );
 };

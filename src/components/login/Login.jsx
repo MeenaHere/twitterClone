@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import UsernamePage from "./UsernamePage";
 import PasswordPage from "./PasswordPage";
 
@@ -7,10 +8,11 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [page, setPage] = useState(1);
   const [error, setError] = useState("");
+  const history = useHistory();
 
   const handleUsernameNext = (enteredUsername) => {
     setUsername(enteredUsername);
-    setPage(2); // Move to the password page
+    setPage(2);
   };
 
   const handleLogin = async (enteredPassword) => {
@@ -30,7 +32,6 @@ const Login = () => {
 
       if (response.ok) {
         console.log("Login successful");
-        // Redirect to /home after successful login
         history.push("/home");
       } else {
         setError(data.message);
@@ -43,10 +44,23 @@ const Login = () => {
   };
 
   return (
-    <div>
-      {page === 1 && <UsernamePage onNext={handleUsernameNext} />}
-      {page === 2 && <PasswordPage username={username} onLogin={handleLogin} />}
-      {error && <p>{error}</p>}
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card shadow">
+            <div className="card-header bg-primary text-white text-center">
+              Login
+            </div>
+            <div className="card-body">
+              {page === 1 && <UsernamePage onNext={handleUsernameNext} />}
+              {page === 2 && (
+                <PasswordPage username={username} onLogin={handleLogin} />
+              )}
+              {error && <p className="text-danger">{error}</p>}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

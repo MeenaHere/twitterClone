@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import PasswordInput from "./PasswordInput";
+import PasswordInput from "./Password";
 
-const PasswordPage = ({ email, onLogin }) => {
+const PasswordPage = ({ username, onLogin }) => {
+  // Change from email to username
   const [password, setPassword] = useState("");
 
   const handlePasswordChange = (e) => {
@@ -9,14 +10,16 @@ const PasswordPage = ({ email, onLogin }) => {
   };
 
   const handleLogin = () => {
-    onLogin(email, password);
+    onLogin(username, password); // Pass username instead of email
   };
 
   return (
     <div>
       <h2>Enter Password</h2>
       <PasswordInput value={password} onChange={handlePasswordChange} />
-      <button onClick={handleLogin}>Login</button>
+      <button className="btn btn-primary" onClick={handleLogin}>
+        Login
+      </button>
     </div>
   );
 };

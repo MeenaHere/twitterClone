@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function CommentForm({ postId, onCommentSubmit }) {
+function ReplyForm({ commentId, onReplySubmit }) {
     const [content, setContent] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`http://localhost:8000/comment/${postId}`, {
+            const response = await axios.post(`http://localhost:8000/comment/${commentId}/reply`, {
                 userId: 'userId',
                 content: content,
             });
-            onCommentSubmit(response.data);
+            onReplySubmit(response.data);
             setContent('');
         } catch (error) {
-            console.error('Error posting comment:', error);
+            console.error('Error posting reply:', error);
         }
     };
 
@@ -23,12 +23,12 @@ function CommentForm({ postId, onCommentSubmit }) {
             <textarea
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                placeholder="Post your comment"
+                placeholder="Post your reply..."
 
             />
-            <button className='feed-btn' type="submit">Post</button>
+            <button className='feed-btn' type="submit">Reply</button>
         </form>
     );
 }
 
-export default CommentForm;
+export default ReplyForm;

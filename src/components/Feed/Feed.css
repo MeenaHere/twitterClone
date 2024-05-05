@@ -8,6 +8,13 @@
 
 }
 
+textarea {
+    resize: none !important;
+    border: none;
+    outline: none;
+    background: none !important;
+
+}
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .feed::-webkit-scrollbar {
@@ -154,6 +161,7 @@
 
 }
 
+
 .media>img {
     max-width: 500px;
     border-radius: 16px;
@@ -189,8 +197,22 @@
     cursor: pointer;
 }
 
+.post-comment {
+    box-shadow: 1px 1px 3px 1px rgba(151, 151, 151, 0.233);
+    background-color: #ffffff83;
+    padding: 15px 25px;
+    margin: 10px;
+    width: fit-content;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
 .comment:hover {
     background-color: #ededed86;
+}
+
+.comment-icon {
+    cursor: pointer;
 }
 
 .post-info>p {

@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import CommentForm from './Comment';
+import ReplyForm from './CommentReply';
 import axios from 'axios';
 import { FaRegComment } from "react-icons/fa";
 import { AiOutlineRetweet } from "react-icons/ai";
@@ -12,7 +14,9 @@ import { deepPurple } from '@mui/material/colors';
 
 function Post({ post }) {
     const [profilePhoto, setProfilePhoto] = useState(null);
+    const [addComment, setAddComment] = useState(false);
     const [showComments, setShowComments] = useState(false);
+
 
 
 
@@ -39,6 +43,10 @@ function Post({ post }) {
     const date = createdAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
 
+    const toggleAddComment = () => {
+        setAddComment(!addComment);
+    }
+
     const toggleShowComments = () => {
         setShowComments(!showComments);
     }
@@ -52,7 +60,10 @@ function Post({ post }) {
                 <div className="post-content">
 
                     <div className='post-info'>
-                        <Avatar sx={{ bgcolor: deepPurple[500] }}>{post.userId.fullName?.split(' ')[0]?.charAt(0)}</Avatar>
+                        <Avatar sx={{ bgcolor: deepPurple[500] }}>
+                            {post.userId && post.userId.fullName ? post.userId.fullName.split(' ')[0].charAt(0) : ''}
+                        </Avatar>
+
 
                         <p>{post.userId && post.userId.username ? `@${post.userId.username}` : '@username'}</p>
                         <p> &#8226;</p>
@@ -66,19 +77,22 @@ function Post({ post }) {
                     </div>
                     <div className="post-buttons">
                         <span>
-                            <FaRegComment />
+                            <FaRegComment className='comment-icon' onClick={toggleAddComment} />
                             <span className="num">
-                                {post.comments.length}
+                                <span className="num">
+                                    {post.comments && post.comments.length}
+                                </span>
+
                             </span>
 
                         </span>
-                        <AiOutlineRetweet />
-                        <FiHeart />
+                        <AiOutlineRetweet className='comment-icon' />
+                        <FiHeart className='comment-icon' />
                         <p>some other stuff</p>
                     </div>
                 </div>
             </div>
-
+            {showComments && <CommentForm postId={post._id} />}
             <span className='show-all' onClick={toggleShowComments} style={{ cursor: 'pointer' }}>Show All Comments</span>
             {showComments && (
                 <div className='comment-area'>
@@ -86,6 +100,7 @@ function Post({ post }) {
                         <div className='comment' key={comment._id}>
                             <p>@{comment.userId.username}</p>
                             <p>{comment.content}</p>
+                            <ReplyForm commentId={comment._id} />
                         </div>
                     ))}
                 </div>

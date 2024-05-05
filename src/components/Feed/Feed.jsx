@@ -50,16 +50,3 @@ function Feed() {
 
 export default Feed
 
-// Notes:  Change code according to created posts from other users (our own db)
-// code that depends on our data is after posts.map (fix)
-// Alternative:
-/* {posts.map(post => (
-    <div key={post.id}>
-        <h2>{post.title}</h2>
-        <p>{post.content}</p>
-        <p>Author: {post.author}</p>
-    </div>
-))} */   // a simple all posts display
-// create api endpoint that useEffect leads to
-// decide if using TweetBox - might be unnecessary but nice to learn anyway
-// good luck with adding styles :(((  

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 /* import TweetBox from "./TweetBox"; */
 import "./Feed.css";
+import axios from 'axios';
 import { FiSettings } from "react-icons/fi";
-import FlipMove from "react-flip-move";
 import Post from "./Post";
 import CreatePost from "./CreatePost";
 
@@ -12,14 +12,18 @@ function Feed() {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:4000/feed/posts')
-            .then(response => response.json())
-            .then(data => {
-                setPosts(data);
+
+        axios.get('http://localhost:8000/post')
+            .then(response => {
+                console.log('Post response:', response.data);
+
+                setPosts(response.data);
             })
-            .catch(error => console.error('Error fetching posts:', error));
+            .catch(error => {
+                console.error('Error fetching post:', error);
+            });
     }, []);
-    console.log('Posts:', posts);
+
     return (
         <div className="feed">
             <div className="feed-header">
@@ -36,12 +40,9 @@ function Feed() {
             <div className="create-post-container">
                 <CreatePost />
             </div>
-            <h1>Feed</h1>
-            <div>
 
-                {posts.map(post => (
-                    <Post key={post._id} post={post} />
-                ))}
+            <div>
+                {posts && posts.map((post) => <Post key={post._id} post={post} />)}
             </div>
         </div>
     )

@@ -2,8 +2,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Container, Row, Col, Image } from "react-bootstrap";
-import "./profile.css";
+/* import { Container, Row, Col, Image } from "react-bootstrap"; */
+/* import "./profile.css"; */
 import {
   getAllFollowers,
   getAllFollowing,
@@ -13,7 +13,7 @@ import {
 function ProfileInfo() {
   const [user, setUser] = useState([]);
   const [followers, setFollowers] = useState([]);
-  const [following, setfollowing] = useState([]);
+  const [following, setFollowing] = useState([]);
 
   const { id } = useParams();
 
@@ -50,7 +50,7 @@ function ProfileInfo() {
     const fetchData = async () => {
       try {
         const dbFollowing = await getAllFollowing(id);
-        setfollowing(dbFollowing);
+        setFollowing(dbFollowing);
         console.log("Following", dbFollowing);
       } catch (error) {
         console.error("Error fetching data", error);

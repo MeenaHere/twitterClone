@@ -62,6 +62,8 @@
     color: white;
     font-weight: 600;
     font-size: 18px;
+}
 
-
+.sidebar-btn:hover {
+    background-color: rgba(29, 156, 240, 0.603);
 }

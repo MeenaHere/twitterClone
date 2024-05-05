@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Avatar from '@mui/material/Avatar';
+import { deepPurple } from '@mui/material/colors';
 
 function CreatePost({ onPostCreated }) {
     const [author, setAuthor] = useState('');
@@ -8,9 +10,9 @@ function CreatePost({ onPostCreated }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const requestBody = { author, content };
+            const requestBody = { content };
             console.log('Request Body:', requestBody);
-            const response = await axios.post('http://localhost:4000/feed/posts', {
+            const response = await axios.post('http://localhost:8000/feed/posts', {
 
                 content: content,
             });
@@ -30,21 +32,26 @@ function CreatePost({ onPostCreated }) {
     };
 
     return (
-        <div>
-            <h2>Create a New Post</h2>
+        <div className='new-post-container'>
+
             <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Author"
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
-                />
-                <textarea
-                    placeholder="What is happening?!"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                ></textarea>
-                <button type="submit">Post</button>
+
+                <div className="new-post">
+                    <Avatar sx={{ bgcolor: deepPurple[500] }} className='avatar'>A</Avatar>
+                    <input
+                        className='form-input'
+                        placeholder="What is happening?!"
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                    ></input>
+
+                </div>
+                <div className="buttons">
+                    <button type='submit' className="feed-btn">
+                        Post
+                    </button>
+                </div>
+
             </form>
         </div>
     );

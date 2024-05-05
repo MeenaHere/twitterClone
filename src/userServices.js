@@ -15,9 +15,9 @@ const getAllUsers = async () => {
   }
 };
 
-const getOneUser = async (id) => {
+const getOneUser = async (_id) => {
   try {
-    const resp = await axios.get(`${url}/${id}`);
+    const resp = await axios.get(`${url}/${_id}`);
     if (resp.status !== 200) {
       throw new Error("Malfunctioning server GET request");
     }

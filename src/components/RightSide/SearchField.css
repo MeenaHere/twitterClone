@@ -88,7 +88,7 @@
 
 }
 
-.container-right:focus-within {
+.search-container:focus-within {
     border: 1px solid rgb(29, 155, 240);
     background-color: transparent;
 }

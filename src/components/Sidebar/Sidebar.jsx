@@ -16,6 +16,10 @@ import { BsPerson } from "react-icons/bs";
 import { BsPersonFill } from "react-icons/bs";
 import { CiCircleMore } from "react-icons/ci";
 import { CgMoreO } from "react-icons/cg";
+import { IoPeopleOutline } from "react-icons/io5";
+import { IoPeople } from "react-icons/io5";
+import { RiFileListLine } from "react-icons/ri";
+import { RiFileList2Fill } from "react-icons/ri";
 
 
 
@@ -59,25 +63,32 @@ function Sidebar() {
             /*  link="/messages" */
             />
             <SidebarProps
+                active={activeSection === 'Lists'}
+                onClick={() => handleSectionClick('Lists')}
+                Icon={activeSection === 'Lists' ? RiFileList2Fill : RiFileListLine}
+                text="Lists"
+            /* link="/lists" */
+            />
+            <SidebarProps
+                active={activeSection === 'Communities'}
+                onClick={() => handleSectionClick('Communities')}
+                Icon={activeSection === 'Communities' ? IoPeople : IoPeopleOutline}
+                text="Communities"
+            /* link="/communities" */
+            />
+            <SidebarProps
+                active={activeSection === 'Premium'}
+                onClick={() => handleSectionClick('Premium')}
+                Icon={activeSection === 'Premium' ? BsTwitterX : BsTwitterX}
+                text="Premium"
+            /* link="/premium" */
+            />
+            <SidebarProps
                 active={activeSection === 'Profile'}
                 onClick={() => handleSectionClick('Profile')}
                 Icon={activeSection === 'Profile' ? BsPersonFill : BsPerson}
                 text="Profile"
-            /* link="/profile" */
-            />
-            <SidebarProps
-                active={activeSection === 'More'}
-                onClick={() => handleSectionClick('More')}
-                Icon={activeSection === 'More' ? CgMoreO : CiCircleMore}
-                text="More"
-            /* link="/more" */
-            />
-            <SidebarProps
-                active={activeSection === 'More'}
-                onClick={() => handleSectionClick('More')}
-                Icon={activeSection === 'More' ? CgMoreO : CiCircleMore}
-                text="More"
-            /* link="/more" */
+                link="/profile"
             />
             <SidebarProps
                 active={activeSection === 'More'}

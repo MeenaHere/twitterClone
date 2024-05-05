@@ -10,16 +10,9 @@ function HomePage() {
 
         <section className='home-page'>
 
-
             <Sidebar />
-
-
             <Feed />
-            {/* <div> */}
             <SearchField />
-            {/* </div> */}
-
-
 
         </section>
     )

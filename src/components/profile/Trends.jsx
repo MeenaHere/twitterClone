@@ -23,7 +23,7 @@ function Trends() {
         <ul className="list-unstyled p-2">
           {topTrending.map((t, index) => (
             <li key={index}>
-              <b> #{t._id}</b>
+              <b> {t._id}</b>
               <p>{t.count}K</p>
             </li>
           ))}

@@ -1,7 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-/* import { Container, Row, Col, Image } from "react-bootstrap"; */
-/* import "./profile.css"; */
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import {

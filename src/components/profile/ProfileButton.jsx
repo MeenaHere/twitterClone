@@ -7,7 +7,13 @@ import {
   postAFollowing,
 } from "../../userServices";
 
-function ProfileButton({ id, isFollowingStatus, loggedInUserId, showButton }) {
+function ProfileButton({
+  id,
+  isFollowingStatus,
+  loggedInUserId,
+  showButton,
+  setTweetComponentVisibility,
+}) {
   const [isFollowing, setIsFollowing] = useState(isFollowingStatus);
 
   useEffect(() => {
@@ -21,6 +27,7 @@ function ProfileButton({ id, isFollowingStatus, loggedInUserId, showButton }) {
     try {
       await postAFollower(id, newFollower);
       await postAFollowing(loggedInUserId, newFollowing);
+      setTweetComponentVisibility(true); // Show tweet component after successful deletion
     } catch (error) {
       console.error("Error adding follower and following:", error);
     }
@@ -31,6 +38,7 @@ function ProfileButton({ id, isFollowingStatus, loggedInUserId, showButton }) {
     try {
       await deleteAFollower(id, loggedInUserId);
       await deleteAFollowing(loggedInUserId, id);
+      setTweetComponentVisibility(false); // Hide tweet component after successful deletion
     } catch (error) {
       console.error("Error deleting follower and following:", error);
     }
@@ -38,7 +46,7 @@ function ProfileButton({ id, isFollowingStatus, loggedInUserId, showButton }) {
 
   // Function to handle click on follow/unfollow button
   const handleLinkClick = async () => {
-    window.location.reload();
+    //window.location.reload();
     try {
       if (isFollowing) {
         await removeFollowerFollowing(id, loggedInUserId);

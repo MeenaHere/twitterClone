@@ -3,9 +3,12 @@ import "bootstrap/dist/css/bootstrap.css";
 import { Col } from "react-bootstrap";
 import Trends from "./Trends";
 import { useEffect, useState } from "react";
+import Tweet from "./Tweet";
 
 function Profile() {
   const [screenSize, setScreenSize] = useState(false);
+  const [tweetComponentVisibility, setTweetComponentVisibility] =
+    useState(false); // To manage tweet component visibility
 
   useEffect(() => {
     const handleResize = () => {
@@ -26,9 +29,14 @@ function Profile() {
     <div className="container-fluid">
       <div className="row">
         <Col xs={12} md={8}>
-          <ProfileInfo />
+          <ProfileInfo
+            setTweetComponentVisibility={setTweetComponentVisibility}
+          />
         </Col>
         <Col md={3}>{!screenSize && <Trends />}</Col>
+      </div>
+      <div>
+        {tweetComponentVisibility && <Tweet />} {}
       </div>
     </div>
   );

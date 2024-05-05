@@ -8,10 +8,10 @@ import {
 } from "../../userServices.js";
 import ProfileButton from "./ProfileButton.jsx";
 
-function ProfileInfo() {
+function ProfileInfo({ setTweetComponentVisibility }) {
   const [user, setUser] = useState([]);
   const [followers, setFollowers] = useState([]);
-  const [following, setfollowing] = useState([]);
+  const [following, setFollowing] = useState([]);
   const [date, setDate] = useState("");
   const [showButton, setShowButton] = useState(false);
 
@@ -57,7 +57,7 @@ function ProfileInfo() {
     const fetchData = async () => {
       try {
         const dbFollowing = await getAllFollowing(id);
-        setfollowing(dbFollowing);
+        setFollowing(dbFollowing);
       } catch (error) {
         console.error("Error fetching data", error);
       }
@@ -110,6 +110,7 @@ function ProfileInfo() {
               isFollowingStatus={isFollowingStatus}
               loggedInUserId={loggedInUserId}
               showButton={showButton}
+              setTweetComponentVisibility={setTweetComponentVisibility}
             />
           </div>
         </Row>

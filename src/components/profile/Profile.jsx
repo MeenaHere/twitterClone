@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { Col } from "react-bootstrap";
 import Trends from "./Trends";
 import { useEffect, useState } from "react";
-/* import Tweet from "./Tweet"; */
+import Tweet from "./Tweet";
 
 function Profile() {
   const [screenSize, setScreenSize] = useState(false);
@@ -28,7 +28,6 @@ function Profile() {
   return (
     <div className="container-fluid">
       <div className="row">
-
         <Col xs={12} md={8}>
           <ProfileInfo
             setTweetComponentVisibility={setTweetComponentVisibility}
@@ -37,10 +36,9 @@ function Profile() {
         <Col md={3}>{!screenSize && <Trends />}</Col>
       </div>
       <div>
-        {tweetComponentVisibility && <Tweet />} { }
+        {tweetComponentVisibility && <Tweet />} {}
       </div>
-
-    </div >
+    </div>
   );
 }
 

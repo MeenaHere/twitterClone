@@ -70,7 +70,7 @@ function ProfileButton({
     <>
       {!showButton && (
         <Link
-          className="btn btn-primary flex-col-reverse mt-4 rounded-5 px-4 py-2"
+          className="btn btn-primary text-white flex-col-reverse mt-4 rounded-5 px-4 py-2"
           onClick={handleLinkClick}
         >
           {isFollowing ? "Unfollow" : "Follow"}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import UsernamePage from "./UsernamePage";
 import PasswordPage from "./PasswordPage";
 
@@ -8,7 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [page, setPage] = useState(1);
   const [error, setError] = useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleUsernameNext = (enteredUsername) => {
     setUsername(enteredUsername);
@@ -17,13 +17,13 @@ const Login = () => {
 
   const handleLogin = async (enteredPassword) => {
     try {
-      const response = await fetch("/login", {
+      const response = await fetch("/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: username,
+          username,
           password: enteredPassword,
         }),
       });
@@ -32,7 +32,7 @@ const Login = () => {
 
       if (response.ok) {
         console.log("Login successful");
-        history.push("/home");
+        navigate("/users/home");
       } else {
         setError(data.message);
         console.error("Login failed:", data.message);

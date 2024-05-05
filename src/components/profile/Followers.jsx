@@ -55,7 +55,7 @@ function Followers() {
                   to={`/users/${matchedUser._id}`}
                   className="m-4 text-decoration-none"
                 >
-                  {matchedUser.fullName}
+                  {matchedUser.username}
                 </Link>
               </li>
             );

@@ -69,6 +69,9 @@ function ProfileInfo({ setTweetComponentVisibility }) {
   const isFollowingStatus = followers
     .map((follower) => follower.followerId)
     .includes(loggedInUserId);
+  if (isFollowingStatus) {
+    setTweetComponentVisibility(true);
+  }
 
   if (user !== null) {
     return (
@@ -111,6 +114,7 @@ function ProfileInfo({ setTweetComponentVisibility }) {
               loggedInUserId={loggedInUserId}
               showButton={showButton}
               setTweetComponentVisibility={setTweetComponentVisibility}
+              setFollowers={setFollowers}
             />
           </div>
         </Row>

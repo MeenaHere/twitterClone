@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {
   deleteAFollower,
   deleteAFollowing,
+  getAllFollowers,
   postAFollower,
   postAFollowing,
 } from "../../userServices";
@@ -13,6 +14,7 @@ function ProfileButton({
   loggedInUserId,
   showButton,
   setTweetComponentVisibility,
+  setFollowers,
 }) {
   const [isFollowing, setIsFollowing] = useState(isFollowingStatus);
 
@@ -27,7 +29,9 @@ function ProfileButton({
     try {
       await postAFollower(id, newFollower);
       await postAFollowing(loggedInUserId, newFollowing);
-      setTweetComponentVisibility(true); // Show tweet component after successful deletion
+      setTweetComponentVisibility(false); // Show tweet component after successful deletion
+      const updatedFollowers = await getAllFollowers(id);
+      setFollowers(updatedFollowers);
     } catch (error) {
       console.error("Error adding follower and following:", error);
     }
@@ -39,6 +43,8 @@ function ProfileButton({
       await deleteAFollower(id, loggedInUserId);
       await deleteAFollowing(loggedInUserId, id);
       setTweetComponentVisibility(false); // Hide tweet component after successful deletion
+      const updatedFollowers = await getAllFollowers(id);
+      setFollowers(updatedFollowers);
     } catch (error) {
       console.error("Error deleting follower and following:", error);
     }

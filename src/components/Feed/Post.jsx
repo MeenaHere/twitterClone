@@ -60,7 +60,10 @@ function Post({ post }) {
                 <div className="post-content">
 
                     <div className='post-info'>
-                        <Avatar sx={{ bgcolor: deepPurple[500] }}>{post.userId.fullName?.split(' ')[0]?.charAt(0)}</Avatar>
+                        <Avatar sx={{ bgcolor: deepPurple[500] }}>
+                            {post.userId && post.userId.fullName ? post.userId.fullName.split(' ')[0].charAt(0) : ''}
+                        </Avatar>
+
 
                         <p>{post.userId && post.userId.username ? `@${post.userId.username}` : '@username'}</p>
                         <p> &#8226;</p>
@@ -76,7 +79,10 @@ function Post({ post }) {
                         <span>
                             <FaRegComment className='comment-icon' onClick={toggleAddComment} />
                             <span className="num">
-                                {post.comments.length}
+                                <span className="num">
+                                    {post.comments && post.comments.length}
+                                </span>
+
                             </span>
 
                         </span>

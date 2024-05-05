@@ -53,9 +53,6 @@ function SearchField() {
 
     useEffect(() => {
 
-        //make sure it doesn't run for empty string
-        // replace this API with your own API endpoint
-
         if (query !== "") {
             fetch(`http://localhost:8000/api/search?q=${query}`)
                 .then(res => res.json())

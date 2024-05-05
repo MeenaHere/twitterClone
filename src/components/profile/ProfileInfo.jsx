@@ -17,6 +17,7 @@ function ProfileInfo({ setTweetComponentVisibility }) {
 
   const { id } = useParams();
   const navigate = useNavigate();
+  console.log(id);
 
   const loggedInUserId = localStorage.getItem("userId"); //fetching userId from the local storage which one stored during login and signup
 
@@ -30,6 +31,7 @@ function ProfileInfo({ setTweetComponentVisibility }) {
       try {
         const dbuser = await getOneUser(id);
         setUser(dbuser);
+        console.log("user", dbuser);
         const [getDate] = dbuser.createdAt.split("T");
         setDate(getDate);
       } catch (error) {
@@ -58,6 +60,7 @@ function ProfileInfo({ setTweetComponentVisibility }) {
       try {
         const dbFollowing = await getAllFollowing(id);
         setFollowing(dbFollowing);
+        console.log("Following", dbFollowing);
       } catch (error) {
         console.error("Error fetching data", error);
       }
@@ -69,16 +72,25 @@ function ProfileInfo({ setTweetComponentVisibility }) {
   const isFollowingStatus = followers
     .map((follower) => follower.followerId)
     .includes(loggedInUserId);
-  if (isFollowingStatus) {
-    setTweetComponentVisibility(true);
-  }
+  useEffect(() => {
+    if (isFollowingStatus) {
+      setTweetComponentVisibility(true);
+    }
+  }, [isFollowingStatus, setTweetComponentVisibility]);
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
   if (user !== null) {
     return (
       <Container className="mt-1" style={{ textTransform: "capitalize" }}>
         <Row>
           <Col xs={1} md={1} className="display-2">
-            <Link to={`/home/`} className=" text-decoration-none text-dark">
+            <Link
+              className=" text-decoration-none text-dark"
+              onClick={handleGoBack}
+            >
               ←
             </Link>
           </Col>

@@ -2,11 +2,14 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Profile from "./components/profile/Profile";
 import Followers from "./components/profile/Followers";
 import Following from "./components/profile/Following";
+import Login from "./components/login/Login";
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/users/:id" element={<Profile />} />
         <Route path="/" element={<Login />} />
         <Route path="/users/:id/followers/" element={<Followers />} />

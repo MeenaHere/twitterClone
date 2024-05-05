@@ -44,8 +44,8 @@ describe("Followers component", () => {
     // Wait for the API calls to resolve
     await waitFor(() => {
       // Check that the followers are rendered
-      expect(screen.getByText("test 1")).toBeInTheDocument();
-      expect(screen.getByText("test 2")).toBeInTheDocument();
+      expect(screen.getByText("test1")).toBeInTheDocument();
+      expect(screen.getByText("test2")).toBeInTheDocument();
     });
   });
 });

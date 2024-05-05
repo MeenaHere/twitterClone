@@ -1,17 +1,51 @@
-import ProfileInfo from './ProfileInfo.jsx'
-/* import "bootstrap/dist/css/bootstrap.css"; */
-/* import Trends from "./Trends";
-import Tweets from "./Tweets"; */
+import ProfileInfo from "./ProfileInfo";
+import "bootstrap/dist/css/bootstrap.css";
+import { Col } from "react-bootstrap";
+import Trends from "./Trends";
+import { useEffect, useState } from "react";
+import Tweet from "./Tweet";
 
 function Profile() {
+  const [screenSize, setScreenSize] = useState(false);
+  const [tweetComponentVisibility, setTweetComponentVisibility] =
+    useState(false); // To manage tweet component visibility
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Check if screen width falls within tablet size range (768px) to hide the trend component on samll screen
+      setScreenSize(window.innerWidth <= 768);
+    };
+
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row">
-        <ProfileInfo />
-        {/* <Trends /> */}
+<<<<<<< HEAD
+  <ProfileInfo />
+  {/* <Trends /> */ }
+      </div >
+    {/*  <Tweets /> */ }
+=======
+        <Col xs={12} md={8}>
+          <ProfileInfo
+            setTweetComponentVisibility={setTweetComponentVisibility}
+          />
+        </Col>
+        <Col md={3}>{!screenSize && <Trends />}</Col>
       </div>
-      {/*  <Tweets /> */}
-    </div>
+      <div>
+        {tweetComponentVisibility && <Tweet />} {}
+      </div>
+>>>>>>> 99243bfa44494bc1c92696d729c769b59d73fe86
+    </div >
   );
 }
 

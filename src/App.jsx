@@ -3,15 +3,15 @@ import Profile from "./components/profile/Profile";
 import Followers from "./components/profile/Followers";
 import Following from "./components/profile/Following";
 import Login from "./components/login/Login";
+import HomePage from "./components/home/HomePage";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/users/:id" element={<Profile />} />
-        <Route path="/" element={<Login />} />
         <Route path="/users/:id/followers/" element={<Followers />} />
         <Route path="/users/:id/following/" element={<Following />} />
       </Routes>

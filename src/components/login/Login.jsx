@@ -37,7 +37,7 @@ const Login = (props) => {
 
     setTimeout(() => {
       // Navigate to the home page
-      navigate("/home");
+      navigate("/");
     }, 1000);
   };
 

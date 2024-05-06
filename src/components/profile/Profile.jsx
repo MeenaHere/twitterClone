@@ -1,9 +1,9 @@
 import ProfileInfo from "./ProfileInfo";
 import "bootstrap/dist/css/bootstrap.css";
 import { Col } from "react-bootstrap";
-import Trends from "./Trends";
 import { useEffect, useState } from "react";
 import Tweet from "./Tweet";
+import SearchField from "../RightSide/SearchField";
 
 function Profile() {
   const [screenSize, setScreenSize] = useState(false);
@@ -33,7 +33,7 @@ function Profile() {
             setTweetComponentVisibility={setTweetComponentVisibility}
           />
         </Col>
-        <Col md={3}>{!screenSize && <Trends />}</Col>
+        <Col md={3}>{!screenSize && <SearchField />}</Col>
       </div>
       <div>
         {tweetComponentVisibility && <Tweet />} {}

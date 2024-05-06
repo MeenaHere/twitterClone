@@ -1,24 +1,22 @@
-import React from 'react'
-import Sidebar from '../Sidebar/Sidebar'
-import SearchField from '../RightSide/SearchField'
-import Feed from '../Feed/Feed'
-import './HomePage.css'
+import React from "react";
+import Sidebar from "../Sidebar/Sidebar";
+import SearchField from "../RightSide/SearchField";
+import Feed from "../Feed/Feed";
+import "./HomePage.css";
+
 /* import Feed from '../Feed/Feed' */
 
 function HomePage() {
-    return (
-
-        <section className='home-page'>
-
-            <Sidebar />
-            <Feed />
-            <SearchField />
-
-        </section>
-    )
+  return (
+    <section className="home-page">
+      <Sidebar />
+      <Feed />
+      <SearchField />
+    </section>
+  );
 }
 
-export default HomePage
+export default HomePage;
 
 /* HOME PAGE */
 

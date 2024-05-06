@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Sidebar.css'
 import SidebarProps from './SidebarProps';
+import CreatePost from '../Feed/CreatePost';
 
 import { BsTwitterX } from "react-icons/bs";
 import { PiHouse } from "react-icons/pi";
@@ -25,10 +26,18 @@ import { RiFileList2Fill } from "react-icons/ri";
 
 function Sidebar() {
     const [activeSection, setActiveSection] = useState('Home');
+    const [showCreatePost, setShowCreatePost] = useState(false);
+    const [showOverlay, setShowOverlay] = useState(false);
+
     const loggedInUserId = localStorage.getItem("userId");
 
     const handleSectionClick = (section) => {
         setActiveSection(section);
+    };
+
+    const toggleCreatePost = () => {
+        setShowCreatePost(!showCreatePost);
+        setShowOverlay(!showOverlay);
     };
 
     return (
@@ -99,11 +108,15 @@ function Sidebar() {
             /* link="/more" */
             />
 
-            {/*  <div > */}
-            <button className="sidebar-btn">
+            {showCreatePost && <div className="overlay" onClick={toggleCreatePost}></div>}
+            <button className="sidebar-btn" onClick={toggleCreatePost}>
                 Post
             </button>
-            {/*  </div> */}
+            {showCreatePost && (
+                <div className="post-middle">
+                    <CreatePost />
+                </div>
+            )}
             <div className="current-user">
                 {/* Logged In at the moment - avatar, full name, @username */}
             </div>

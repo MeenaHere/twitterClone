@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getTop5Hash } from "../../tweetServices";
-import SearchField from "../RightSide/SearchField";
+/* import SearchField from "../RightSide/SearchField"; */
 
 function Trends() {
   const [topTrending, setToptrending] = useState([]);
@@ -15,7 +15,7 @@ function Trends() {
   }, []);
   return (
     <div className="mt-2">
-      <SearchField />
+      {/*  <SearchField /> */}
       <div className=" w-100 m-2 p-2 bg-light rounded-4">
         <p className=" ">
           <b className="trend-heading text-sm">Trends for you</b>

@@ -25,6 +25,7 @@ import { RiFileList2Fill } from "react-icons/ri";
 
 function Sidebar() {
     const [activeSection, setActiveSection] = useState('Home');
+    const loggedInUserId = localStorage.getItem("userId");
 
     const handleSectionClick = (section) => {
         setActiveSection(section);
@@ -88,7 +89,7 @@ function Sidebar() {
                 onClick={() => handleSectionClick('Profile')}
                 Icon={activeSection === 'Profile' ? BsPersonFill : BsPerson}
                 text="Profile"
-                link="/profile"
+                link={`/users/${loggedInUserId}`}
             />
             <SidebarProps
                 active={activeSection === 'More'}
@@ -111,22 +112,3 @@ function Sidebar() {
 }
 
 export default Sidebar
-
-{/* <Router>
-<Routes>
-    <Route path="/users/:id" element={<Profile />} />
-    <Route path="/users/edit/:id" element={<EditProfile />} />
-    <Route path="/users/:id/followers/" element={<Followers />} />
-    <Route path="/users/:id/following/" element={<Following />} />
-</Routes>
-</Router> */}
-
-/*  <div className="sidebar-icons">
-             <BsTwitterX className='X-icon' />
-             <PiHouse className='home-icon' />
-             <IoSearch className='explore-icon' />
-             <IoNotificationsOutline className='notifications-icon' />
-             <HiOutlineEnvelope className='messages-icon' />
-             <BsPerson className='profile-icon' />
-             <CiCircleMore className='more-icon' />
-         </div> */

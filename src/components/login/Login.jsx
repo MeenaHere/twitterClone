@@ -34,6 +34,11 @@ const Login = (props) => {
     }
 
     // Authentication calls will be HERE!!!
+
+    setTimeout(() => {
+      // Navigate to the home page
+      navigate("/home");
+    }, 1000);
   };
 
   return (

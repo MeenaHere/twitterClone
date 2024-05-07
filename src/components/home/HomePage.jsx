@@ -1,12 +1,12 @@
-import Tweetbox from '../Tweetbox.jsx';
-// import UserInfo from './UserInfo.jsx';
-
-const HomePage = () => {
+import Tweetbox from './Tweetbox.jsx';
+import GetAllPosts from './GetAllPosts.jsx';
+const Home = () => {
     return (
         <div className="container-home">
             <Tweetbox />
+            <GetAllPosts />
         </div>
     );
 } 
 
-export default HomePage;
+export default Home;

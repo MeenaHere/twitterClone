@@ -1,42 +1,44 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import UsernamePage from "./UsernamePage";
-import PasswordPage from "./PasswordPage";
-import axios from "axios";
-const backendURL = "http://localhost:4000/users";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import axios from "axios"; // HTTP client for backend communication
+
+// Set the default base URL for axios requests
+axios.defaults.baseURL = "http://localhost:4000";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [page, setPage] = useState(1);
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [username, setUsername] = useState(""); // Username state
+  const [password, setPassword] = useState(""); // Password state
+  const [error, setError] = useState(""); // Error state
+  const navigate = useNavigate(); // Use for redirection
+
   const handleUsernameNext = (enteredUsername) => {
-    setUsername(enteredUsername);
-    setPage(2);
+    setUsername(enteredUsername); // Update the username
   };
 
-  const handleLogin = async (enteredPassword) => {
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value); // Update the password
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
     try {
-      console.log("Attempting login with username:", username, "and password:", enteredPassword);
-      const response = await axios.post(`${backendURL}/login`, {
+      const response = await axios.post("/login", {
         username,
-        password: enteredPassword, //
+        password, // Send username and password to the backend
       });
 
       if (response.status === 200) {
         console.log("Login successful");
-        navigate("/home");
+        const userId = response.data.userId; // Get user ID from response (if applicable)
+        navigate(`/users/${userId}`); // Redirect to the user's profile page
       } else {
         setError("Login failed. Please check your credentials.");
       }
     } catch (error) {
-      if (error.response) {
-        setError(error.response.data.message);
-      } else {
-        setError("Server error. Please try again later.");
-      }
-      console.error("Error during login:", error.message);
+      const errorMessage =
+        error.response?.data?.message || error.message || "Unknown error";
+      setError(errorMessage); // Display error message to the user
+      console.error("Error during login:", errorMessage); // Log the error details
     }
 
     // Authentication calls will be HERE!!!
@@ -56,11 +58,34 @@ const Login = () => {
               Login
             </div>
             <div className="card-body">
-              {page === 1 && <UsernamePage onNext={handleUsernameNext} />}
-              {page === 2 && (
-                <PasswordPage username={username} onLogin={handleLogin} />
-              )}
-              {error && <p className="text-danger">{error}</p>}
+              {/* Login form with username and password */}
+              <form onSubmit={handleLogin}>
+                <div className="form-group">
+                  <label>Username:</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)} // Update username state
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Password:</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    value={password}
+                    onChange={handlePasswordChange} // Update password state
+                    required
+                  />
+                </div>
+                <button type="submit" className="btn btn-primary btn-block">
+                  Login
+                </button>
+              </form>
+              {error && <p className="text-danger">{error}</p>}{" "}
+              {/* Display error message */}
             </div>
           </div>
         </div>

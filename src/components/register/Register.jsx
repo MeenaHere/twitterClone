@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://localhost:4000";
 
 const RegisterUser = () => {
   const navigate = useNavigate();
@@ -15,30 +18,43 @@ const RegisterUser = () => {
     picture: null,
   });
 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value }); // Update formData with the new field value
   };
 
   const handlePictureChange = (e) => {
-    setFormData({ ...formData, picture: e.target.files[0] });
+    setFormData({ ...formData, picture: e.target.files[0] }); // Update formData with the selected file
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const formDataToSend = new FormData(); // Use FormData for multipart/form-data
+
+    // Append the form fields to formDataToSend
+    for (const key in formData) {
+      if (formData[key] !== null) {
+        formDataToSend.append(key, formData[key]);
+      }
+    }
+
     try {
-      const response = await fetch("http://localhost:8000/users/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+      const response = await axios.post("/register", formDataToSend, {
+        headers: { "Content-Type": "multipart/form-data" }, // Indicate the content type for file uploads
       });
-      const data = await response.json();
-      console.log(data);
-      navigate("/login");
+
+      console.log("Registration successful:", response.data);
+
+      if (response.status === 201) {
+        navigate("/login"); // Navigate to the login page upon successful registration
+      }
     } catch (error) {
-      console.error("Error during registration:", error);
+      const errorMessage =
+        error.response?.data?.message || error.message || "Unknown error";
+      console.error("Error during registration:", errorMessage);
+      alert("Registration failed: " + errorMessage);
     }
   };
 
@@ -83,7 +99,7 @@ const RegisterUser = () => {
                     onChange={handleChange}
                   />
                 </div>
-                <div className="form-group">
+                <div class="form-group">
                   <label>Full Name:</label>
                   <input
                     type="text"

@@ -47,7 +47,7 @@ const Tweetbox = () => {
 
   const handleTweetSubmit = async () => {
     try {
-      await axios.post('http://localhost:4000/tweets/create', { content: tweet }); // Adjusted URL to match backend route
+      await axios.post('http://localhost:8000/tweets/create', { content: tweet }); // Adjusted URL to match backend route
       setStatus('Tweet posted successfully');
       setTweet(''); // Clear input after successful posting
     } catch (error) {

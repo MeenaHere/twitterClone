@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import axios from "axios";
+axios.defaults.baseURL = "http://localhost:4000";
+
 
 const RegisterUser = () => {
   const [formData, setFormData] = useState({
@@ -25,17 +28,14 @@ const RegisterUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await response.json();
-      console.log(data);
+      const response = await axios.post("/register", formData); // POST request to backend
+      console.log("Registration successful:", response.data); // Log success message
     } catch (error) {
-      console.error("Error during registration:", error);
+      // Handle error with detailed message
+      const errorMessage =
+        error.response?.data?.message || error.message || "Unknown error";
+      console.error("Error during registration:", errorMessage);
+      alert("Registration failed: " + errorMessage);
     }
   };
 

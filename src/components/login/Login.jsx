@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import UsernamePage from "./UsernamePage";
 import PasswordPage from "./PasswordPage";
 import axios from "axios";
-const backendURL = "http://localhost:8085";
 
+// Set the default base URL for all axios requests
+axios.defaults.baseURL = "http://localhost:4000";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -12,6 +13,7 @@ const Login = () => {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
+
   const handleUsernameNext = (enteredUsername) => {
     setUsername(enteredUsername);
     setPage(2);
@@ -19,24 +21,26 @@ const Login = () => {
 
   const handleLogin = async (enteredPassword) => {
     try {
-      const response = await axios.post(`${backendURL}/login`, {
+      const response = await axios.post("/login", {
         username,
-        password: enteredPassword, //
+        password: enteredPassword, // Data sent to the backend
       });
 
       if (response.status === 200) {
         console.log("Login successful");
-        navigate("/users/profile");
+        navigate("/users/:id"); // Navigate to the profile page on success
       } else {
         setError("Login failed. Please check your credentials.");
       }
     } catch (error) {
+      let errorMessage = "Server error. Please try again later.";
+
       if (error.response) {
-        setError(error.response.data.message);
-      } else {
-        setError("Server error. Please try again later.");
+        errorMessage = error.response.data.message;
       }
-      console.error("Error during login:", error.message);
+
+      setError(errorMessage); // Display error message in the frontend
+      console.error("Error during login:", errorMessage); // Log error details
     }
   };
 
@@ -53,7 +57,8 @@ const Login = () => {
               {page === 2 && (
                 <PasswordPage username={username} onLogin={handleLogin} />
               )}
-              {error && <p className="text-danger">{error}</p>}
+              {error && <p className="text-danger">{error}</p>}{" "}
+              {/* Display error if any */}
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import { BsSearch } from "react-icons/bs";
 import { BsXCircleFill } from "react-icons/bs";
 import "./SearchField.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-/* import Trend from "../profile/Trends"; */
+import Trend from "../profile/Trends";
 
 function SearchField() {
   const [query, setQuery] = useState("");
@@ -104,7 +104,7 @@ function SearchField() {
 
       <div>{/* Premium */}</div>
       <div>
-        {/*    <Trend /> */}
+        <Trend />
       </div>
     </section>
   );

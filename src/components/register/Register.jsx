@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:4000";
 
@@ -29,7 +30,10 @@ const RegisterUser = () => {
     e.preventDefault();
     try {
       const response = await axios.post("/register", formData); // POST request to backend
-      console.log("Registration successful:", response.data); // Log success message
+      console.log("Registration successful:", response.data);
+      if (response.status === 201) {
+        navigate("/login");
+      } // Log success message
     } catch (error) {
       // Handle error with detailed message
       const errorMessage =

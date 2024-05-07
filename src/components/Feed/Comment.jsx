@@ -7,7 +7,7 @@ function CommentForm({ postId, onCommentSubmit }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`http://localhost:4000/comment/${postId}`, {
+            const response = await axios.post(`http://localhost:8000/comment/${postId}`, {
                 userId: 'userId',
                 content: content,
             });

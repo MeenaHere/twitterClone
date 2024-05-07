@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from "react";
 /* import TweetBox from "./TweetBox"; */
 import "./Feed.css";
-import axios from 'axios';
+import axios from "axios";
 import { FiSettings } from "react-icons/fi";
 import Post from "./Post";
 import CreatePost from "./CreatePost";
 
-
 function Feed() {
-
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-
-        axios.get('http://localhost:4000/post')
-            .then(response => {
-                console.log('Post response:', response.data);
+        axios
+            .get("http://localhost:4000/post")
+            .then((response) => {
+                console.log("Post response:", response.data);
 
                 setPosts(response.data);
             })
-            .catch(error => {
-                console.error('Error fetching post:', error);
+            .catch((error) => {
+                console.error("Error fetching post:", error);
             });
     }, []);
 
@@ -45,8 +43,7 @@ function Feed() {
                 {posts && posts.map((post) => <Post key={post._id} post={post} />)}
             </div>
         </div>
-    )
+    );
 }
 
-export default Feed
-
+export default Feed;

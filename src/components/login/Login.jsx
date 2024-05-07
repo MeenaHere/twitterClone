@@ -1,79 +1,69 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import UsernamePage from "./UsernamePage";
+import PasswordPage from "./PasswordPage";
+import axios from "axios";
+const backendURL = "http://localhost:8000/users";
 
-const Login = (props) => {
-  const [email, setEmail] = useState("");
+const Login = () => {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-
+  const [page, setPage] = useState(1);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
+  const handleUsernameNext = (enteredUsername) => {
+    setUsername(enteredUsername);
+    setPage(2);
+  };
 
-  const onButtonClick = () => {
-    setEmailError("");
-    setPasswordError("");
+  const handleLogin = async (enteredPassword) => {
+    try {
+      console.log("Attempting login with username:", username, "and password:", enteredPassword);
+      const response = await axios.post(`${backendURL}/login`, {
+        username,
+        password: enteredPassword, //
+      });
 
-    if (email === "") {
-      setEmailError("Please enter your email");
-      return;
-    }
-
-    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-      setEmailError("Please enter a valid email");
-      return;
-    }
-
-    if (password === "") {
-      setPasswordError("Please enter a password");
-      return;
-    }
-
-    if (password.length < 8) {
-      setPasswordError("The password must be 8 characters or longer");
-      return;
+      if (response.status === 200) {
+        console.log("Login successful");
+        navigate("/users/profile");
+      } else {
+        setError("Login failed. Please check your credentials.");
+      }
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data.message);
+      } else {
+        setError("Server error. Please try again later.");
+      }
+      console.error("Error during login:", error.message);
     }
 
     // Authentication calls will be HERE!!!
 
     setTimeout(() => {
       // Navigate to the home page
-      navigate("/");
+      navigate("/home");
     }, 1000);
   };
 
   return (
-    <div className={"mainContainer"}>
-      <div className={"titleContainer"}>
-        <div>Login</div>
-      </div>
-      <br />
-      <div className={"inputContainer"}>
-        <input
-          value={email}
-          placeholder="Enter your email here"
-          onChange={(ev) => setEmail(ev.target.value)}
-          className={"inputBox"}
-        />
-        <label className="errorLabel">{emailError}</label>
-      </div>
-      <br />
-      <div className={"inputContainer"}>
-        <input
-          value={password}
-          placeholder="Enter your password here"
-          onChange={(ev) => setPassword(ev.target.value)}
-          className={"inputBox"}
-        />
-        <label className="errorLabel">{passwordError}</label>
-      </div>
-      <br />
-      <div className={"inputContainer"}>
-        <input
-          className={"inputButton"}
-          type="button"
-          onClick={onButtonClick}
-          value={"Log in"}
-        />
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card shadow">
+            <div className="card-header bg-primary text-white text-center">
+              Login
+            </div>
+            <div className="card-body">
+              {page === 1 && <UsernamePage onNext={handleUsernameNext} />}
+              {page === 2 && (
+                <PasswordPage username={username} onLogin={handleLogin} />
+              )}
+              {error && <p className="text-danger">{error}</p>}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

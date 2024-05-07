@@ -1,9 +1,10 @@
 import ProfileInfo from "./ProfileInfo";
 import "bootstrap/dist/css/bootstrap.css";
 import { Col } from "react-bootstrap";
-import Trends from "./Trends";
 import { useEffect, useState } from "react";
 import Tweet from "./Tweet";
+import SearchField from "../RightSide/SearchField";
+import Sidebar from "../Sidebar/Sidebar";
 
 function Profile() {
   const [screenSize, setScreenSize] = useState(false);
@@ -26,17 +27,26 @@ function Profile() {
   }, []);
 
   return (
-    <div className="container-fluid">
+    <div className="container">
       <div className="row">
-        <Col xs={12} md={8}>
+        <Col xs={3} md={3} lg={3}>
+          <Sidebar />
+        </Col>
+        <Col xs={9} md={6} lg={6}>
           <ProfileInfo
             setTweetComponentVisibility={setTweetComponentVisibility}
           />
         </Col>
-        <Col md={3}>{!screenSize && <Trends />}</Col>
+        <Col md={3} lg={3}>
+          {!screenSize && <SearchField />}
+        </Col>
       </div>
-      <div>
-        {tweetComponentVisibility && <Tweet />} {}
+      <div className="row">
+        <Col md={3} lg={3}></Col>
+        <Col xs={9} md={6} lg={6} className="border">
+          {tweetComponentVisibility && <Tweet />} {}
+        </Col>
+        <Col md={3} lg={3}></Col>
       </div>
     </div>
   );

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate for redire
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:4000";
 
-
 const RegisterUser = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -17,29 +16,29 @@ const RegisterUser = () => {
     picture: null,
   });
 
+  const navigate = useNavigate(); // Define the navigate function for redirection
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value }); 
   };
 
   const handlePictureChange = (e) => {
-    setFormData({ ...formData, picture: e.target.files[0] });
+    setFormData({ ...formData, picture: e.target.files[0] }); 
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/register", formData); // POST request to backend
-      console.log("Registration successful:", response.data);
+      const response = await axios.post("/register", formData); 
+      console.log("Registration successful:", response.data); 
+
       if (response.status === 201) {
-        navigate("/login");
-      } // Log success message
-    } catch (error) {
-      // Handle error with detailed message
+        navigate("/login"); 
       const errorMessage =
         error.response?.data?.message || error.message || "Unknown error";
       console.error("Error during registration:", errorMessage);
-      alert("Registration failed: " + errorMessage);
+      alert("Registration failed: " + errorMessage); 
     }
   };
 

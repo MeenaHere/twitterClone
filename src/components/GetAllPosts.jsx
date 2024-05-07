@@ -9,7 +9,7 @@ const GetAllPosts = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/tweets');
+        const response = await axios.get('http://localhost:8000/tweets');
         setPosts(response.data);
       } catch (error) {
         setError('Failed to fetch posts');

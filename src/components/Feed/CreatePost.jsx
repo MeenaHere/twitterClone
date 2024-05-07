@@ -12,7 +12,7 @@ function CreatePost({ onPostCreated }) {
         try {
             const requestBody = { content };
             console.log('Request Body:', requestBody);
-            const response = await axios.post('http://localhost:8000/feed/posts', {
+            const response = await axios.post('http://localhost:4000/feed/posts', {
 
                 content: content,
             });

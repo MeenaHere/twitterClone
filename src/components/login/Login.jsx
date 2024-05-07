@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import UsernamePage from "./UsernamePage";
 import PasswordPage from "./PasswordPage";
 import axios from "axios";
-const backendURL = "http://localhost:8000/users";
+const backendURL = "http://localhost:4000/users";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -26,7 +26,7 @@ const Login = () => {
 
       if (response.status === 200) {
         console.log("Login successful");
-        navigate("/users/profile");
+        navigate("/home");
       } else {
         setError("Login failed. Please check your credentials.");
       }

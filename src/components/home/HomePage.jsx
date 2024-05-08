@@ -2,9 +2,8 @@ import React from "react";
 import Sidebar from "../Sidebar/Sidebar";
 import SearchField from "../RightSide/SearchField";
 import Feed from "../Feed/Feed";
-import Tweetbox from './Tweetbox.jsx';
-import GetAllPosts from './GetAllPosts.jsx';
-import HomePage from './components/home/HomePage.jsx'
+import Tweetbox from "../Tweetbox.jsx";
+import GetAllPosts from "../GetAllPosts.jsx";
 import "./HomePage.css";
 
 /* import Feed from '../Feed/Feed' */
@@ -17,7 +16,6 @@ function HomePage() {
       <SearchField />
       <Tweetbox />
       <GetAllPosts />
-      <
     </section>
   );
 }

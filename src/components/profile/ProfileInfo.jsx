@@ -102,7 +102,7 @@ function ProfileInfo({ setTweetComponentVisibility }) {
     return (
       <Container className="mt-1" style={{ textTransform: "capitalize" }}>
         <Row>
-          <Col xs={1} md={1} className="display-2">
+          <Col xs={1} md={1} className="display-4">
             <Link
               className=" text-decoration-none text-dark"
               onClick={handleGoBack}
@@ -110,7 +110,7 @@ function ProfileInfo({ setTweetComponentVisibility }) {
               ←
             </Link>
           </Col>
-          <Col xs={10} md={10} className=" m-3">
+          <Col xs={5} md={10} className="m-2">
             <h4 className="fw-bold">{user.fullName}</h4>
             <p className="small-font">{Tweet.length} Tweets</p>
           </Col>

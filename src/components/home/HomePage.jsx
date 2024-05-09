@@ -12,8 +12,8 @@ function HomePage() {
       <Sidebar />
       <Feed />
       <SearchField />
-      <Tweetbox />
-      <GetAllPosts />
+      {/* <Tweetbox />
+      <GetAllPosts /> */}
     </section>
   );
 }

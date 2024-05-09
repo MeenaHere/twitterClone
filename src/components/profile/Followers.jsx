@@ -3,12 +3,14 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Col, Image, Row } from "react-bootstrap";
 import { getAllFollowers, getAllUsers, getOneUser } from "../../userServices";
 import Sidebar from "../Sidebar/Sidebar";
+import SearchField from "../RightSide/SearchField";
 
 function Followers() {
   const [followers, setFollowers] = useState([]);
   const [users, setUsers] = useState([]);
   const { id } = useParams();
   const [user, setUser] = useState(null);
+  const [screenSize, setScreenSize] = useState(false);
 
   const navigate = useNavigate();
 
@@ -51,6 +53,22 @@ function Followers() {
     };
     fetchData();
   }, [id]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Check if screen width falls within tablet size range (768px) to hide the trend component on samll screen
+      setScreenSize(window.innerWidth <= 768);
+    };
+
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const handleGoBack = () => {
     navigate(-1);
   };
@@ -59,10 +77,10 @@ function Followers() {
     return (
       <div className="container">
         <div className="row">
-          <Col xs={3} md={3} lg={3}>
-            <Sidebar />
+          <Col md={4} lg={3}>
+            {!screenSize && <Sidebar />}
           </Col>
-          <Col xs={9} md={6} lg={6}>
+          <Col xs={10} md={6} lg={6}>
             <Row>
               <Col xs={1} md={1} className="display-4">
                 <Link
@@ -116,6 +134,9 @@ function Followers() {
                 }
               })}
             </ul>
+          </Col>
+          <Col md={3} lg={3}>
+            {!screenSize && <SearchField />}
           </Col>
         </div>
       </div>

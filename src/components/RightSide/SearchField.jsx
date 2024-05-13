@@ -1,23 +1,29 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
 import { BsXCircleFill } from "react-icons/bs";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from 'axios';
 import "./SearchField.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-/* import Trend from "../profile/Trends"; */
+import Trend from "../profile/Trends";
 
 function SearchField() {
+  /* const [user, setUser] = useState([]); */
   const [query, setQuery] = useState("");
   const [searchData, setSearchData] = useState([]);
   const [select, setSelect] = useState(-1);
   const [isSearchActive, setIsSearchActive] = useState(false);
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  /*   const UserId = localStorage.setItem("userId", id); */
 
   const handleChange = (e) => {
     const value = e.target.value;
     setQuery(value);
     if (value === "") {
-      setSearchData([]); // Clear search results if input is empty
-      setSelect(-1); // Reset selection index
+      setSearchData([]);
+      setSelect(-1);
     }
     setIsSearchActive(value.trim() !== "");
   };
@@ -28,23 +34,39 @@ function SearchField() {
     setSelect(-1);
     setIsSearchActive(false);
   };
-  // Function that enables search with arrow keys
+
   const handleKeyDown = (e) => {
     if (searchData.length > 0) {
-      // Check if there are search results
       if (select < searchData.length) {
         if (e.key === "ArrowUp" && select > 0) {
           setSelect((prev) => prev - 1);
         } else if (e.key === "ArrowDown" && select < searchData.length - 1) {
           setSelect((prev) => prev + 1);
         } else if (e.key === "Enter" && select >= 0) {
-          window.open(searchData[select].url);
+          navigate(`/profile/${searchData[select].userId}`); // Navigate to profile page
         }
       } else {
         setSelect(-1);
       }
     }
   };
+  /*   useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const dbuser = await getOneUser(id);
+          setUser(dbuser);
+          console.log("user", dbuser);
+          if (dbuser.createdAt) {
+            const [getDate] = dbuser.createdAt.split("T");
+            setDate(getDate);
+          }
+        } catch (error) {
+          console.error("Error fetching data", error);
+        }
+      };
+      fetchData();
+    }, [id]);
+   */
 
   useEffect(() => {
     if (query !== "") {
@@ -53,7 +75,7 @@ function SearchField() {
         .then((data) => setSearchData(data))
         .catch((error) => console.error("Error fetching data:", error));
     }
-  }, [query]); //useEffect will run whenever we change 'query' value
+  }, [query]);
 
   return (
     <section className="container-right">
@@ -71,7 +93,7 @@ function SearchField() {
             onChange={handleChange}
             onKeyDown={handleKeyDown}
           />
-          {/* <button onClick={handleSearch}>Search</button> */}
+
           {query && (
             <div className="close-button">
               <BsXCircleFill onClick={handleClose} />
@@ -82,18 +104,27 @@ function SearchField() {
             {isSearchActive &&
               (searchData.length > 0 ? (
                 searchData.map((data, index) => (
-                  <a
-                    href={data.url}
+                  <div
                     key={index}
-                    target="_blank"
                     className={
                       select === index
                         ? "suggestion-line active"
                         : "suggestion-line"
                     }
+                    onClick={async () => {
+                      try {
+                        const userResponse = await axios.get(
+                          `http://localhost:4000/users/${data._id}`
+                        );
+                        const userData = userResponse.data;
+                        navigate(`/users/${userData._id}`);
+                      } catch (error) {
+                        console.error("Error fetching user data:", error);
+                      }
+                    }}
                   >
                     {data.fullName}
-                  </a>
+                  </div>
                 ))
               ) : (
                 <p>Try searching for people, lists, or keywords</p>
@@ -104,13 +135,14 @@ function SearchField() {
 
       <div>{/* Premium */}</div>
       <div>
-        {/*   <Trend /> */}
+        <Trend />
       </div>
     </section>
   );
 }
 
 export default SearchField;
+
 
 // Notes: Don't forget to change to my own backend api
 // just a reference

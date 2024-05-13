@@ -5,7 +5,7 @@ import axios from "axios";
 axios.defaults.baseURL = "http://localhost:4000";
 
 const RegisterUser = () => {
-  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -18,19 +18,22 @@ const RegisterUser = () => {
     picture: null,
   });
 
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value }); // Update formData with the new field value
+    console.log(`Updating ${name} to:`, value);
+    setFormData({ ...formData, [name]: value });
   };
 
-  const handlePictureChange = (e) => {
-    setFormData({ ...formData, picture: e.target.files[0] }); // Update formData with the selected file
-  };
-
+  /* 
+    const handlePictureChange = (e) => {
+      setFormData({ ...formData, picture: e.target.files[0] }); // Update formData with the selected file
+    };
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log("Form data:", formData);
     const formDataToSend = new FormData(); // Use FormData for multipart/form-data
 
     // Append the form fields to formDataToSend
@@ -39,12 +42,12 @@ const RegisterUser = () => {
         formDataToSend.append(key, formData[key]);
       }
     }
-
+    console.log("FormData to send:", formDataToSend);
     try {
       const response = await axios.post("/register", formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" }, // Indicate the content type for file uploads
       });
-
+      console.log("Registration response:", response);
       console.log("Registration successful:", response.data);
 
       if (response.status === 201) {
@@ -99,7 +102,7 @@ const RegisterUser = () => {
                     onChange={handleChange}
                   />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                   <label>Full Name:</label>
                   <input
                     type="text"
@@ -152,7 +155,7 @@ const RegisterUser = () => {
                     onChange={handleChange}
                   />
                 </div>
-                <div className="form-group">
+                {/*  <div className="form-group">
                   <label>Profile Picture:</label>
                   <input
                     type="file"
@@ -160,7 +163,7 @@ const RegisterUser = () => {
                     name="picture"
                     onChange={handlePictureChange}
                   />
-                </div>
+                </div> */}
                 <button type="submit" className="btn btn-primary btn-block">
                   Register
                 </button>

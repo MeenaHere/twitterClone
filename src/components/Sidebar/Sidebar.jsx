@@ -49,7 +49,7 @@ function Sidebar() {
                 onClick={() => handleSectionClick('Home')}
                 Icon={activeSection === 'Home' ? PiHouseFill : PiHouse}
                 text="Home"
-                link="/"
+                link="/home"
             />
             <SidebarProps
                 active={activeSection === 'Explore'}

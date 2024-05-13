@@ -29,8 +29,12 @@ const Login = () => {
 
       if (response.status === 200) {
         console.log("Login successful");
-        const userId = response.data.userId; // Get user ID from response (if applicable)
-        navigate(`/users/${userId}`); // Redirect to the user's profile page
+        console.log(response.data);
+        const userId = response.data.userId;
+        localStorage.setItem("userId", userId); // Store user ID in local storage
+        console.log(localStorage.getItem("userId"));
+        navigate(`/homepage`);
+        /*        navigate(`/users/${userId}`); // Redirect to the user's profile page */
       } else {
         setError("Login failed. Please check your credentials.");
       }
@@ -40,14 +44,8 @@ const Login = () => {
       setError(errorMessage); // Display error message to the user
       console.error("Error during login:", errorMessage); // Log the error details
     }
-
-    // Authentication calls will be HERE!!!
-
-    setTimeout(() => {
-      // Navigate to the home page
-      navigate("/home");
-    }, 1000);
   };
+
 
   return (
     <div className="container mt-5">

@@ -20,7 +20,7 @@ function Post({ post }) {
 
 
 
-    console.log('Post:', post);
+
     useEffect(() => {
         fetchProfilePhoto();
 
@@ -52,7 +52,7 @@ function Post({ post }) {
     }
 
 
-    console.log('Post:', post);
+
     return (
         <div className='container-post'>
             <div className="post-card">

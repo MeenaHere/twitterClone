@@ -1,32 +1,39 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function CommentForm({ postId, onCommentSubmit }) {
+function CommentForm({ postId }) {
     const [content, setContent] = useState('');
+    const [status, setStatus] = useState("");
 
-    const handleSubmit = async (e) => {
+    const handleInputChange = (event) => {
+        setContent(event.target.value);
+    };
+    const handleSubmit = async () => {
         e.preventDefault();
         try {
-            const response = await axios.post(`http://localhost:8000/comment/${postId}`, {
-                userId: 'userId',
-                content: content,
-            });
-            onCommentSubmit(response.data);
-            setContent('');
+            const userId = localStorage.getItem("userId");
+            /* const postId = localStorage.getItem("postId"); */
+            const response = await axios.post(`http://localhost:4000/comment/${postId}/${userId}`, { content });
+            if (response.status === 201) {
+                setContent(""); // Clear input after successful posting
+            } else {
+                setStatus("Failed to create post");
+            }
         } catch (error) {
-            console.error('Error posting comment:', error);
+            setStatus("Failed to create post");
+            console.error("Error creating post:", error);
         }
     };
 
     return (
-        <form className='post-comment' onSubmit={handleSubmit}>
+        <form className='post-comment'>
             <textarea
                 value={content}
-                onChange={(e) => setContent(e.target.value)}
+                onChange={handleInputChange}
                 placeholder="Post your comment"
 
             />
-            <button className='feed-btn' type="submit">Post</button>
+            <button className='feed-btn' onClick={handleSubmit}>Post</button>
         </form>
     );
 }

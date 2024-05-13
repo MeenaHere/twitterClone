@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 import axios from "axios";
 import "./login.css";
+import "./PasswordPage";
+import "./UsernamePage";
 
 // Set the default base URL for axios requests
 axios.defaults.baseURL = "http://localhost:4000";

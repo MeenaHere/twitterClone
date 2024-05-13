@@ -7,4 +7,26 @@ describe("ProfileInfo component", () => {
     cy.wait(5000);
     cy.contains("Trends for you").should("be.visible");
   });
+
+  it("should contain Followers", () => {
+    cy.contains("Followers");
+  });
+  
+  it("should show Meena in Followers list", () => {
+    cy.contains("Followers").click(); 
+    cy.contains("Meena");
+  });
+
+  it("should contain Following", () => {
+    cy.contains("Following");
+  });
+
+  it("should contain Home", () => {
+    cy.contains("Home");
+  });
+
+  it("should navigate to Home page", () => {
+    cy.contains("Home").click(); 
+  });
+
 });

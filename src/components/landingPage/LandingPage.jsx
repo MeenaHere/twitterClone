@@ -20,6 +20,7 @@ const LandingPage = () => {
   };
 
   return (
+   
     <div className="container">
       <div className="content_wrapper">
         <div className="twitter_logo left_side">
@@ -40,13 +41,13 @@ const LandingPage = () => {
             <button type="button" className="google_btn btn btn-outline-dark">
               <FontAwesomeIcon
                 icon={faGoogle}
-                size="s"
+                size="lg"
                 style={{ color: "#ffb83d" }}
               />
               <span> Sign up with Google </span>
             </button>
             <button className="apple_btn btn btn-outline-dark ">
-              <FontAwesomeIcon className="apple_icon" icon={faApple} size="s" />
+              <FontAwesomeIcon className="apple_icon" icon={faApple} size="lg" />
               <span> Sign up with Apple </span>
             </button>
             <p className="or_divider">

@@ -7,6 +7,7 @@ import {
   getOneUser,
 } from "../../userServices.js";
 import ProfileButton from "./ProfileButton.jsx";
+import LogoutConfirmationModal from "../logout/Logout.jsx";
 
 function ProfileInfo() {
   const [user, setUser] = useState([]);
@@ -152,6 +153,9 @@ function ProfileInfo() {
               </Link>
             </Col>
           </Row>
+        </Row>
+        <Row>
+          <LogoutConfirmationModal />
         </Row>
       </Container>
     );

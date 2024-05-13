@@ -31,7 +31,7 @@ const Login = () => {
       if (response.status === 200) {
         console.log("Login successful");
         const userId = response.data.userId; // Get user ID from response (if applicable)
-        navigate(`/users/${userId}`); // Redirect to the user's profile page
+        navigate(`/homepage`); // Redirect to the user's profile page
       } else {
         setError("Login failed. Please check your credentials.");
       }

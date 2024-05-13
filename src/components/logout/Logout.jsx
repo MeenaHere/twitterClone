@@ -16,7 +16,11 @@ const LogoutConfirmationModal = ({ show, onConfirm, onCancel }) => {
       </Modal.Header>
       <Modal.Body>Are you sure you want to log out?</Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={onCancel}>
+        <Button
+          
+          variant="secondary"
+          onClick={onCancel}
+        >
           Cancel
         </Button>
         <Button

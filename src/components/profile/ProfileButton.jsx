@@ -3,11 +3,19 @@ import { Link } from "react-router-dom";
 import {
   deleteAFollower,
   deleteAFollowing,
+  getAllFollowers,
   postAFollower,
   postAFollowing,
 } from "../../userServices";
 
-function ProfileButton({ id, isFollowingStatus, loggedInUserId, showButton }) {
+function ProfileButton({
+  id,
+  isFollowingStatus,
+  loggedInUserId,
+  showButton,
+  setTweetComponentVisibility,
+  setFollowers,
+}) {
   const [isFollowing, setIsFollowing] = useState(isFollowingStatus);
 
   useEffect(() => {
@@ -21,6 +29,9 @@ function ProfileButton({ id, isFollowingStatus, loggedInUserId, showButton }) {
     try {
       await postAFollower(id, newFollower);
       await postAFollowing(loggedInUserId, newFollowing);
+      setTweetComponentVisibility(false); // Show tweet component after successful deletion
+      const updatedFollowers = await getAllFollowers(id);
+      setFollowers(updatedFollowers);
     } catch (error) {
       console.error("Error adding follower and following:", error);
     }
@@ -31,6 +42,9 @@ function ProfileButton({ id, isFollowingStatus, loggedInUserId, showButton }) {
     try {
       await deleteAFollower(id, loggedInUserId);
       await deleteAFollowing(loggedInUserId, id);
+      setTweetComponentVisibility(false); // Hide tweet component after successful deletion
+      const updatedFollowers = await getAllFollowers(id);
+      setFollowers(updatedFollowers);
     } catch (error) {
       console.error("Error deleting follower and following:", error);
     }
@@ -38,7 +52,7 @@ function ProfileButton({ id, isFollowingStatus, loggedInUserId, showButton }) {
 
   // Function to handle click on follow/unfollow button
   const handleLinkClick = async () => {
-    window.location.reload();
+    //window.location.reload();
     try {
       if (isFollowing) {
         await removeFollowerFollowing(id, loggedInUserId);
@@ -56,7 +70,7 @@ function ProfileButton({ id, isFollowingStatus, loggedInUserId, showButton }) {
     <>
       {!showButton && (
         <Link
-          className="btn btn-primary flex-col-reverse mt-4 rounded-5 px-4 py-2"
+          className="btn btn-primary text-white flex-col-reverse mt-4 rounded-5 px-4 py-2"
           onClick={handleLinkClick}
         >
           {isFollowing ? "Unfollow" : "Follow"}

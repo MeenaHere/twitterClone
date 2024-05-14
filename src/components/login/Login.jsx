@@ -54,7 +54,6 @@ const Login = () => {
               Sign in to X
             </div>
             <div className="card-body text-center">
-              {/* Login form with username and password */}
               <form onSubmit={handleLogin}>
                 <div className="form-floating mb-3">
                   <input

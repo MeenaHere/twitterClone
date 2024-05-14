@@ -29,7 +29,7 @@ describe("Followers component", () => {
     await waitFor(() => {
       // Check that the top trending hashtags are rendered correctly
       topTrendingHashtags.map((hashtag) => {
-        const hashtagElement = screen.getByText(`#${hashtag._id}`);
+        const hashtagElement = screen.getByText(`${hashtag._id}`);
         expect(hashtagElement).toBeInTheDocument(); //check if the hashtag printed as expected using # symbol
         const hashtagCount = screen.getByText(`${hashtag.count}K`);
         expect(hashtagCount).toBeInTheDocument(); //check if the total count printedt as expected

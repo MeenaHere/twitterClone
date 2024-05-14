@@ -29,7 +29,7 @@ function Sidebar() {
     const [showCreatePost, setShowCreatePost] = useState(false);
     const [showOverlay, setShowOverlay] = useState(false);
 
-    const loggedInUserId = localStorage.getItem("userId");
+    const userId = localStorage.getItem("userId");
 
     const handleSectionClick = (section) => {
         setActiveSection(section);
@@ -98,7 +98,7 @@ function Sidebar() {
                 onClick={() => handleSectionClick('Profile')}
                 Icon={activeSection === 'Profile' ? BsPersonFill : BsPerson}
                 text="Profile"
-                link={`/users/${loggedInUserId}`}
+                link={`/users/${userId}`}
             />
             <SidebarProps
                 active={activeSection === 'More'}

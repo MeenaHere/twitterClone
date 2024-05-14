@@ -70,7 +70,7 @@ function SearchField() {
 
   useEffect(() => {
     if (query !== "") {
-      fetch(`http://localhost:4000/search/search?q=${query}`)
+      fetch(`http://localhost:4000/search?q=${query}`)
         .then((res) => res.json())
         .then((data) => setSearchData(data))
         .catch((error) => console.error("Error fetching data:", error));

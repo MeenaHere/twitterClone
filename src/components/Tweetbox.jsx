@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from 'axios';
-import Avatar from '@mui/material/Avatar'
+import Avatar from '@mui/material/Avatar';
 import { styled } from '@mui/system';
 import SourceOutlinedIcon from '@mui/icons-material/SourceOutlined';
 import { blue } from '@mui/material/colors';
@@ -10,8 +10,8 @@ import BallotOutlinedIcon from '@mui/icons-material/BallotOutlined';
 import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
+import AuthContext from '../AuthContext';
 
-// Create a custom styled icon component with blue color
 const BlueFolderOpenIcon = styled(SourceOutlinedIcon)({
   color: blue[500],
 });
@@ -36,10 +36,13 @@ const GoodIconComponent = styled(FmdGoodOutlinedIcon)({
   color: blue[500],
 });
 
+axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.withCredentials = true;
 
 const Tweetbox = () => {
   const [tweet, setTweet] = useState('');
   const [status, setStatus] = useState('');
+  const { auth } = useContext(AuthContext);
 
   const handleInputChange = (event) => {
     setTweet(event.target.value);
@@ -47,23 +50,26 @@ const Tweetbox = () => {
 
   const handleTweetSubmit = async () => {
     try {
-      await axios.post('http://localhost:8000/tweets/create', { content: tweet }); // Adjusted URL to match backend route
+      if (!auth.user) {
+        setStatus('Unauthorized. Please log in.');
+        return;
+      }
+      await axios.post('tweets/create', { content: tweet });
       setStatus('Tweet posted successfully');
-      setTweet(''); // Clear input after successful posting
+      setTweet('');
     } catch (error) {
       setStatus('Failed to post tweet');
       console.error('Posting error:', error);
     }
   };
+
   return (
     <div className="tweetbox-container">
       <div className="tweetbox-title">
         <h2>Home</h2>
       </div>
       <div className="tweetbox">
-        <Avatar src="Public/photo.jpg"
-          sx={{ width: 60, height: 60 }}
-        />
+        <Avatar src="Public/photo.jpg" sx={{ width: 60, height: 60 }} />
         <input
           type="text"
           placeholder="What's happening?!"

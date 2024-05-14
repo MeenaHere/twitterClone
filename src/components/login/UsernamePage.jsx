@@ -24,3 +24,4 @@ const UsernamePage = ({ onNext }) => {
 };
 
 export default UsernamePage;
+

@@ -4,15 +4,16 @@ import Profile from "./components/profile/Profile";
 import Followers from "./components/profile/Followers";
 import Following from "./components/profile/Following";
 import Login from "./components/login/Login";
-import HomePage from "./components/home/HomePage";
 import Register from "./components/register/Register";
-import Home from "./Home";
+import LandingPage from "./components/landingPage/LandingPage";
+import HomePage from "./components/home/HomePage";
+// import ProfileCopy from "./components/profile/ProfileCopy";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/homepage" element={<HomePage />} />

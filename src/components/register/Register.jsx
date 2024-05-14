@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./register.css";
 
 axios.defaults.baseURL = "http://localhost:4000";
 
@@ -22,30 +23,15 @@ const RegisterUser = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(`Updating ${name} to:`, value);
     setFormData({ ...formData, [name]: value });
   };
 
-  /* 
-    const handlePictureChange = (e) => {
-      setFormData({ ...formData, picture: e.target.files[0] }); // Update formData with the selected file
-    };
-   */
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form data:", formData);
-    const formDataToSend = new FormData(); // Use FormData for multipart/form-data
 
-    // Append the form fields to formDataToSend
-    for (const key in formData) {
-      if (formData[key] !== null) {
-        formDataToSend.append(key, formData[key]);
-      }
-    }
-    console.log("FormData to send:", formDataToSend);
     try {
-      const response = await axios.post("/register", formDataToSend, {
-        headers: { "Content-Type": "multipart/form-data" }, // Indicate the content type for file uploads
+      const response = await axios.post("/register", formData, {
+        headers: { "Content-Type": "application/json" }, // Send as JSON
       });
       console.log("Registration response:", response);
       console.log("Registration successful:", response.data);
@@ -62,111 +48,120 @@ const RegisterUser = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container mt-5">
       <div className="row justify-content-center">
         <div className="col-md-6">
-          <div className="card">
-            <h5 className="card-header text-center">User Registration</h5>
+          <div className="card p-3">
+            <h5 className="card-header text-center">
+              {" "}
+              <p>
+                <strong>X</strong>
+              </p>
+              <p>User Registration</p>
+            </h5>
             <div className="card-body">
               <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label>Username:</label>
+                <div className="form-floating mb-2">
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control form-control-sm slim-input"
                     name="username"
-                    required
                     value={formData.username}
                     onChange={handleChange}
+                    required
                   />
+                  <label>Username</label>
                 </div>
-                <div className="form-group">
-                  <label>Password:</label>
+
+                <div className="form-floating mb-2">
                   <input
                     type="password"
-                    className="form-control"
+                    className="form-control form-control-sm slim-input"
                     name="password"
-                    required
                     value={formData.password}
                     onChange={handleChange}
+                    required
                   />
+                  <label>Password</label>
                 </div>
-                <div className="form-group">
-                  <label>Email:</label>
+
+                <div className="form-floating mb-2">
                   <input
                     type="email"
-                    className="form-control"
+                    className="form-control form-control-sm slim-input"
                     name="email"
-                    required
                     value={formData.email}
                     onChange={handleChange}
+                    required
                   />
+                  <label>Email</label>
                 </div>
-                <div className="form-group">
-                  <label>Full Name:</label>
+
+                <div className="form-floating mb-2">
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control form-control-sm slim-input"
                     name="fullName"
-                    required
                     value={formData.fullName}
                     onChange={handleChange}
+                    required
                   />
+                  <label>Full Name</label>
                 </div>
-                <div className="form-group">
-                  <label>Profession:</label>
+
+                <div className="form-floating mb-2">
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control form-control-sm slim-input"
                     name="profession"
-                    required
                     value={formData.profession}
                     onChange={handleChange}
+                    required
                   />
+                  <label>Profession</label>
                 </div>
-                <div className="form-group">
-                  <label>Hometown:</label>
+
+                <div className="form-floating mb-2">
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control form-control-sm slim-input"
                     name="hometown"
-                    required
                     value={formData.hometown}
                     onChange={handleChange}
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Description:</label>
-                  <textarea
-                    className="form-control"
-                    name="description"
                     required
+                  />
+                  <label>Hometown</label>
+                </div>
+
+                <div className="form-floating mb-2">
+                  <textarea
+                    className="form-control form-control-sm slim-input"
+                    name="description"
                     value={formData.description}
                     onChange={handleChange}
+                    required
                   />
+                  <label>Description</label>
                 </div>
-                <div className="form-group">
-                  <label>Website:</label>
+
+                <div className="form-floating mb-2">
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control form-control-sm slim-input"
                     name="website"
                     value={formData.website}
                     onChange={handleChange}
                   />
+                  <label>Website</label>
                 </div>
-                {/*  <div className="form-group">
-                  <label>Profile Picture:</label>
-                  <input
-                    type="file"
-                    className="form-control-file"
-                    name="picture"
-                    onChange={handlePictureChange}
-                  />
-                </div> */}
-                <button type="submit" className="btn btn-primary btn-block">
-                  Register
-                </button>
+                <div className="d-flex justify-content-center">
+                  <button
+                    type="submit"
+                    className="btn register_btn btn-outline-dark"
+                  >
+                    Register
+                  </button>
+                </div>
               </form>
             </div>
           </div>

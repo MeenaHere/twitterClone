@@ -7,6 +7,7 @@ import {
   getOneUser,
 } from "../../userServices.js";
 import ProfileButton from "./ProfileButton.jsx";
+import LogoutConfirmationModal from "../logout/Logout.jsx";
 import { ownTweets } from "../../tweetServices.js";
 
 function ProfileInfo({ setTweetComponentVisibility }) {
@@ -185,6 +186,9 @@ function ProfileInfo({ setTweetComponentVisibility }) {
               </Link>
             </Col>
           </Row>
+        </Row>
+        <Row>
+          <LogoutConfirmationModal />
         </Row>
       </Container>
     );

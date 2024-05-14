@@ -1,0 +1,17 @@
+.slim-input {
+  height: 2rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.form-floating {
+  margin-bottom: 0.5rem;
+}
+
+textarea.slim-input {
+  height: 3rem;
+}
+.register_btn {
+  margin-top: 1.5rem;
+  border-radius: 18px;
+}

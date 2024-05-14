@@ -7,6 +7,7 @@ import {
   getOneUser,
 } from "../../userServices.js";
 import ProfileButton from "./ProfileButton.jsx";
+import { ownTweets } from "../../tweetServices.js";
 
 function ProfileInfo({ setTweetComponentVisibility }) {
   const [user, setUser] = useState([]);
@@ -14,6 +15,7 @@ function ProfileInfo({ setTweetComponentVisibility }) {
   const [following, setFollowing] = useState([]);
   const [date, setDate] = useState("");
   const [showButton, setShowButton] = useState(false);
+  const [Tweet, setTweet] = useState([]);
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -68,6 +70,20 @@ function ProfileInfo({ setTweetComponentVisibility }) {
     fetchData();
   }, [id]);
 
+  //get a profile user tweets data from db by using id
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const dbTweets = await ownTweets(id);
+        setTweet(dbTweets);
+        console.log("tweet", dbTweets);
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    };
+    fetchData();
+  }, [id]);
+
   //checking if the user is already followed (for the follow unfollow status)
   const isFollowingStatus = followers
     .map((follower) => follower.followerId)
@@ -86,7 +102,7 @@ function ProfileInfo({ setTweetComponentVisibility }) {
     return (
       <Container className="mt-1" style={{ textTransform: "capitalize" }}>
         <Row>
-          <Col xs={1} md={1} className="display-2">
+          <Col xs={1} md={1} className="display-4">
             <Link
               className=" text-decoration-none text-dark"
               onClick={handleGoBack}
@@ -94,9 +110,9 @@ function ProfileInfo({ setTweetComponentVisibility }) {
               ←
             </Link>
           </Col>
-          <Col xs={10} md={10} className=" m-3">
+          <Col xs={5} md={10} className="m-2">
             <h4 className="fw-bold">{user.fullName}</h4>
-            <p className="small-font">3.1k Tweets</p>
+            <p className="small-font">{Tweet.length} Tweets</p>
           </Col>
         </Row>
         <Row>

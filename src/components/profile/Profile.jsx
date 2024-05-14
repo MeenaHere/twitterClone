@@ -2,14 +2,17 @@ import ProfileInfo from "./ProfileInfo";
 import "bootstrap/dist/css/bootstrap.css";
 import { Col } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import Tweet from "./Tweet";
+import ProfileTweet from "./ProfileTweet";
 import SearchField from "../RightSide/SearchField";
 import Sidebar from "../Sidebar/Sidebar";
+import { useParams } from "react-router-dom";
 
 function Profile() {
   const [screenSize, setScreenSize] = useState(false);
   const [tweetComponentVisibility, setTweetComponentVisibility] =
     useState(false); // To manage tweet component visibility
+
+  const { id } = useParams();
 
   useEffect(() => {
     const handleResize = () => {
@@ -43,8 +46,8 @@ function Profile() {
       </div>
       <div className="row">
         <Col md={3} lg={3}></Col>
-        <Col xs={9} md={6} lg={6} className="border">
-          {tweetComponentVisibility && <Tweet />} { }
+        <Col xs={9} md={6} lg={6}>
+          {tweetComponentVisibility && <ProfileTweet id={id} />} { }
         </Col>
         <Col md={3} lg={3}></Col>
       </div>

@@ -6,18 +6,16 @@ import Feed from "../Feed/Feed";
 /* import GetAllPosts from "../GetAllPosts.jsx"; */
 import "./HomePage.css";
 
-/* import Feed from '../Feed/Feed' */
-
 function HomePage() {
-    return (
-        <section className="home-page">
-            <Sidebar />
-            <Feed />
-            <SearchField />
-            {/*   <Tweetbox /> */}
-            {/*   <GetAllPosts /> */}
-        </section>
-    );
+  return (
+    <section className="home-page">
+      <Sidebar />
+      <Feed />
+      <SearchField />
+      {/*   <Tweetbox /> */}
+      {/*   <GetAllPosts /> */}
+    </section>
+  );
 }
 
 export default HomePage;

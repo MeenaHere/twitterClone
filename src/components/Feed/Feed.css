@@ -224,3 +224,12 @@ textarea {
 .post-card:hover {
     background-color: #ededed;
 }
+
+.post-icons {
+    display: flex;
+    margin-left: 60px;
+}
+
+.icon {
+    margin-right: 10px;
+}

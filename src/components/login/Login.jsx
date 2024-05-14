@@ -35,7 +35,8 @@ const Login = () => {
         console.log("Login successful");
         console.log(response.data);
         const { userId } = response.data; // Destructure userId from response data
-        localStorage.setItem("userId", userId); // Store user ID in local storage
+        localStorage.setItem("userId", userId);
+        localStorage.setItem("name", response.data.user.fullName); // Store user ID in local storage
         console.log(localStorage.getItem("userId"));
         navigate(`/homepage`);
         /*        navigate(`/users/${userId}`); // Redirect to the user's profile page */

@@ -6,6 +6,7 @@ import { FiSettings } from "react-icons/fi";
 import Post from "./Post";
 import CreatePost from "./CreatePost";
 import Tweetbox from "../Tweetbox";
+/* import Tweetbox from "../Tweetbox"; */
 
 function Feed() {
     const [posts, setPosts] = useState([]);

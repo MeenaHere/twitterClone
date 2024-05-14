@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.withCredentials = true;
+
 function CommentForm({ postId }) {
     const [content, setContent] = useState('');
     const [status, setStatus] = useState("");
 
+    const loggedInUserId = localStorage.getItem("userId");
+    console.log(localStorage.getItem("userId"))
+
     const handleInputChange = (event) => {
         setContent(event.target.value);
     };
+
     const handleSubmit = async () => {
         e.preventDefault();
         try {
-            const userId = localStorage.getItem("userId");
-            /* const postId = localStorage.getItem("postId"); */
-            const response = await axios.post(`http://localhost:4000/comment/${postId}/${userId}`, { content });
+            if (!loggedInUserId) {
+                setStatus('Unauthorized. Please log in.');
+                return;
+            }
+            const response = await axios.post(`http://localhost:4000/comment/${postId}`, { content });
             if (response.status === 201) {
                 setContent(""); // Clear input after successful posting
             } else {

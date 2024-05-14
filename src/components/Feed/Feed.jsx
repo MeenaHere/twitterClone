@@ -5,6 +5,7 @@ import axios from "axios";
 import { FiSettings } from "react-icons/fi";
 import Post from "./Post";
 import CreatePost from "./CreatePost";
+import Tweetbox from "../Tweetbox";
 
 function Feed() {
     const [posts, setPosts] = useState([]);
@@ -36,7 +37,7 @@ function Feed() {
                 </div>
             </div>
             <div className="create-post-container">
-                <CreatePost />
+                <Tweetbox />
             </div>
 
             <div>

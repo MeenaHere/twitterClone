@@ -15,8 +15,8 @@ function CommentForm({ postId }) {
         setContent(event.target.value);
     };
 
-    const handleSubmit = async () => {
-        e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault(); // Prevent default form submission behavior
         try {
             if (!loggedInUserId) {
                 setStatus('Unauthorized. Please log in.');

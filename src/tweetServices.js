@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:4000/tweets";
+const url = "http://localhost:4000";
 
 const getTop5Hash = async (id) => {
   try {

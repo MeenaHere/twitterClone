@@ -24,13 +24,14 @@ const Login = () => {
     try {
       const response = await axios.post("/login", {
         username,
-        password, // Send username and password to the backend
+        password,
+        // Send username and password to the backend
       });
 
       if (response.status === 200) {
         console.log("Login successful");
         console.log(response.data);
-        const userId = response.data.userId;
+        const { userId } = response.data; // Destructure userId from response data
         localStorage.setItem("userId", userId); // Store user ID in local storage
         console.log(localStorage.getItem("userId"));
         navigate(`/homepage`);
@@ -45,7 +46,6 @@ const Login = () => {
       console.error("Error during login:", errorMessage); // Log the error details
     }
   };
-
 
   return (
     <div className="container mt-5">

@@ -13,11 +13,10 @@ function App() {
   return (
     <Router>
       <Routes>
-     
-        <Route path="/homepage" element={<HomePage />} />
         <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/homepage" element={<HomePage />} />
         <Route path="/users/:id" element={<Profile />} />
         <Route path="/users/:id/followers/" element={<Followers />} />
         <Route path="/users/:id/following/" element={<Following />} />
@@ -27,4 +26,4 @@ function App() {
 }
 
 
-export default App
+export default App;

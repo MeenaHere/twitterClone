@@ -7,6 +7,6 @@ const Home = () => {
             <GetAllPosts />
         </div>
     );
-} 
+}
 
 export default Home;

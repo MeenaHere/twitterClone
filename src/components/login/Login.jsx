@@ -27,7 +27,8 @@ const Login = () => {
     try {
       const response = await axios.post("/login", {
         username,
-        password, // Send username and password to the backend
+        password,
+        // Send username and password to the backend
       });
 
       if (response.status === 200) {

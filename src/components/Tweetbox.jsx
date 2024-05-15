@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-unused-vars
-import React,{ useState }  from "react";
+import React, { useState, useContext } from "react";
 import axios from 'axios';
-import Avatar from '@mui/material/Avatar'
 import { styled } from '@mui/system';
 import SourceOutlinedIcon from '@mui/icons-material/SourceOutlined';
 import { blue } from '@mui/material/colors';
@@ -10,87 +9,93 @@ import BallotOutlinedIcon from '@mui/icons-material/BallotOutlined';
 import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
+import AuthContext from '../AuthContext';
+import Avatar from "@mui/material/Avatar";
+import { deepPurple } from "@mui/material/colors";
 
-// Create a custom styled icon component with blue color
 const BlueFolderOpenIcon = styled(SourceOutlinedIcon)({
-  color: blue[500], 
+  color: blue[500],
 });
 
 const GifIconComponent = styled(GifBoxOutlinedIcon)({
   color: blue[500],
-}); 
+});
 
 const BallotIconComponent = styled(BallotOutlinedIcon)({
   color: blue[500],
 });
 
 const EmojiIconComponent = styled(EmojiEmotionsOutlinedIcon)({
-    color: blue[500],
-    });
+  color: blue[500],
+});
 
 const EventIconComponent = styled(EventNoteOutlinedIcon)({
-    color: blue[500],
-    });
+  color: blue[500],
+});
 
 const GoodIconComponent = styled(FmdGoodOutlinedIcon)({
-    color: blue[500],
-    });
+  color: blue[500],
+});
 
+axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.withCredentials = true;
 
-    const Tweetbox = () => {
-        const [tweet, setTweet] = useState('');
-        const [status, setStatus] = useState('');
-      
-        const handleInputChange = (event) => {
-          setTweet(event.target.value);
-        };
-      
-        const handleTweetSubmit = async () => {
-          try {
-            await axios.post('http://localhost:8000/tweets/create', { content: tweet }); // Adjusted URL to match backend route
-            setStatus('Tweet posted successfully');
-            setTweet(''); // Clear input after successful posting
-          } catch (error) {
-            setStatus('Failed to post tweet');
-            console.error('Posting error:', error);
-          }
-        };
-    return (
-        <div className="tweetbox-container">
-            <div className="tweetbox-title">
-                <h2>Home</h2>
-            </div>
-            <div className="tweetbox">
-                <Avatar src="Public/photo.jpg" 
-                    sx={{ width: 60, height: 60 }} 
-                />
-                <input 
-                    type="text" 
-                    placeholder="What's happening?!"
-                    value={tweet}
-                    onChange={handleInputChange}
-                />
-            </div>
-        
-            <div className="tweetbox-line">
-                <hr />
-            </div>
-            <div className="tweetbox-footer">
-                <div className="tweetbox-footer">
-                    <BlueFolderOpenIcon />
-                    <GifIconComponent />
-                    <BallotIconComponent />
-                    <EmojiIconComponent />
-                    <EventIconComponent />
-                    <GoodIconComponent />
-                </div>
-                <div className="tweet-button">
-                    <button className="t-button" onClick={handleTweetSubmit}>Tweet</button>
-                </div>
-            </div>
-            {status && <p>{status}</p>}
-        </div>
-    );
-} 
+const Tweetbox = () => {
+  const [tweet, setTweet] = useState('');
+  const [status, setStatus] = useState('');
+  /* const { auth } = useContext(AuthContext); */
+  const loggedInUserId = localStorage.getItem("userId");
+  console.log(localStorage.getItem("userId"))
+  const handleInputChange = (event) => {
+    setTweet(event.target.value);
+  };
+
+  const handleTweetSubmit = async () => {
+    try {
+      if (!loggedInUserId) {
+        setStatus('Unauthorized. Please log in.');
+        return;
+      }
+      await axios.post('tweets/create', { content: tweet });
+      setStatus('Tweet posted successfully');
+      setTweet('');
+    } catch (error) {
+      setStatus('Failed to post tweet');
+      console.error('Posting error:', error);
+    }
+  };
+
+  return (
+    <div className="new-post-container">
+
+      <div className="new-post">
+        <Avatar sx={{ bgcolor: deepPurple[500] }}>
+          {loggedInUserId ? loggedInUserId.split(' ')[0].charAt(0) : ''}
+        </Avatar>
+        {/* <Avatar src="Public/photo.jpg" sx={{ width: 60, height: 60 }} /> */}
+        <input
+          type="text"
+          placeholder="What's happening?!"
+          value={tweet}
+          onChange={handleInputChange}
+          className="form-input"
+        />
+      </div>
+
+      <div className="post-icons">
+        <BlueFolderOpenIcon className="icon" />
+        <GifIconComponent className="icon" />
+        <BallotIconComponent className="icon" />
+        <EmojiIconComponent className="icon" />
+        <EventIconComponent className="icon" />
+        <GoodIconComponent className="icon" />
+      </div>
+      <div className="buttons">
+        <button className="feed-btn" onClick={handleTweetSubmit}>Tweet</button>
+      </div>
+      {status && <p>{status}</p>}
+    </div>
+  );
+}
 
 export default Tweetbox;

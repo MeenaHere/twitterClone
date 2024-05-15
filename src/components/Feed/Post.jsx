@@ -20,7 +20,7 @@ function Post({ post }) {
 
 
 
-    console.log('Post:', post);
+
     useEffect(() => {
         fetchProfilePhoto();
 
@@ -30,7 +30,7 @@ function Post({ post }) {
 
     const fetchProfilePhoto = async () => {
         try {
-            const response = await axios.get('https://dog.ceo/api/breeds/image/random');
+            const response = await axios.get('http://localhost:4000/posts/random-dog-image');
             const randomDogImageUrl = response.data.message;
             setProfilePhoto(randomDogImageUrl);
         } catch (error) {
@@ -52,7 +52,7 @@ function Post({ post }) {
     }
 
 
-    console.log('Post:', post);
+
     return (
         <div className='container-post'>
             <div className="post-card">

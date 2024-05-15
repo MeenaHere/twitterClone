@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PasswordInput from "./Password";
+import PasswordInput from '../login/Password'
 
 const PasswordPage = ({ username, onLogin }) => {
   // Change from email to username
@@ -10,7 +10,7 @@ const PasswordPage = ({ username, onLogin }) => {
   };
 
   const handleLogin = () => {
-    onLogin(username, password); // Pass username instead of email
+    onLogin(password); // Pass username instead of email
   };
 
   return (

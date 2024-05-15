@@ -6,6 +6,7 @@ import "./register.css";
 axios.defaults.baseURL = "http://localhost:4000";
 
 const RegisterUser = () => {
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -32,7 +33,7 @@ const RegisterUser = () => {
       const response = await axios.post("/register", formData, {
         headers: { "Content-Type": "application/json" }, // Send as JSON
       });
-
+      console.log("Registration response:", response);
       console.log("Registration successful:", response.data);
 
       if (response.status === 201) {

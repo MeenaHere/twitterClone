@@ -1,0 +1,93 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif; /* Use a modern font */
+    background-color: #f5f8fa; /* Light blue background, similar to Twitter's */
+    padding: 20px;
+}
+.container-home{
+    max-width: large;
+    margin: auto;
+    
+} 
+
+.h1 {
+    font-size: large;
+    font-weight: bold;
+    padding: 4px;
+
+
+} 
+
+.home-page{
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 500px;
+    margin: 20px auto; 
+}
+
+.tweetbox-title {
+    border-bottom: 0.01px solid rgb(231, 231, 228);
+}
+
+.tweetbox {
+    display: flex;
+    align-items: center;
+} 
+
+.tweetbox > input {
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    margin-left: 1em;
+    margin-bottom: 80px;
+    margin-top: 30px;
+    
+}
+
+
+.tweetbox-footer {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 10px; 
+}
+
+.tweet-button {
+    display: flex;
+    justify-content: center; 
+    margin-top: 10px; 
+    
+
+}
+.tweetbox-line {
+   color: 0.01px solid rgb(231, 231, 228);
+}
+
+.t-button {
+    padding: 10px 20px;
+    background-color: #1DA1F2;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+} 
+
+.t-button:hover  {
+    background-color: #0d8ad7;
+    
+}
+
+.t-button:active {
+    background-color: #0a6ca1;
+  }
+
+

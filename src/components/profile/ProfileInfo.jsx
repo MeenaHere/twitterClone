@@ -46,6 +46,7 @@ function ProfileInfo({ setTweetComponentVisibility }) {
   
   useEffect(() => {
     setShowButton(id === loggedInUserId);
+    setTweetComponentVisibility(true)
   }, [id, loggedInUserId]);
 
   //get a user data from db by using loggedInUserId
@@ -216,6 +217,8 @@ function ProfileInfo({ setTweetComponentVisibility }) {
         </Row>
       </Container>
     );
+  } else {
+    <div>Loading</div>
   }
 }
 

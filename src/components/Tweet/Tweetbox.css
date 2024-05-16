@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif; /* Use a modern font */
-    background-color: #f5f8fa; /* Light blue background, similar to Twitter's */
+    background-color: #F5F8FA; /* Light blue background, similar to Twitter's */
     padding: 20px;
 }
 .container-home{
@@ -48,6 +48,7 @@ body {
     margin-left: 1em;
     margin-bottom: 80px;
     margin-top: 30px;
+    background-color: #F5F8FA;
     
 }
 

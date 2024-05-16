@@ -86,7 +86,7 @@ const Tweetbox = () => {
       </div>
       
       <div className="tweetbox">
-        <Avatar src="Public/photo.jpg" sx={{ width: 60, height: 60 }} />
+        <Avatar src="twee" sx={{ width: 60, height: 60 }} />
         <input
           value={content}
           onChange={(e) => setContent(e.target.value)}

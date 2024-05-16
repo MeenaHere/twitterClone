@@ -1,8 +1,9 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import Avatar from "@mui/material/Avatar";
 import { deepPurple } from "@mui/material/colors";
-import AuthContext from "../../AuthContext";
+// import AuthContext from "../../AuthContext";
 
 
 
@@ -12,7 +13,7 @@ axios.defaults.withCredentials = true;
 function CreatePost() {
     const [content, setContent] = useState("");
     const [status, setStatus] = useState("");
-    const { auth } = useContext(AuthContext);
+    // const { auth } = useContext(AuthContext);
 
     const handleInputChange = (event) => {
         setContent(event.target.value);
@@ -20,10 +21,10 @@ function CreatePost() {
 
     const handlePostSubmit = async () => {
         try {
-            if (!auth.user) {
-                setStatus('Unauthorized. Please log in.');
-                return;
-            }
+            // if (!auth.user) {
+            //     setStatus('Unauthorized. Please log in.');
+            //     return;
+            // }
 
             const response = await axios.post(`http://localhost:4000/posts/create`, { content });
 

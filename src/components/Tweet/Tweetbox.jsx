@@ -1,6 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useContext } from "react";
 import axios from 'axios';
+// eslint-disable-next-line no-unused-vars
+import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import { styled } from '@mui/system';
 import SourceOutlinedIcon from '@mui/icons-material/SourceOutlined';
@@ -42,6 +44,7 @@ axios.defaults.withCredentials = true;
 
 const Tweetbox = () => {
   const [content, setContent] = useState('');
+  const navigate = useNavigate();
 
   // Function to create a tweet
   const createTweet = async () => {
@@ -79,6 +82,10 @@ const Tweetbox = () => {
     createTweet();
   };
 
+  const handleAvatarClick = () => {
+    navigate('/users/:id');
+  };
+
   return (
     <div className="tweetbox-container">
       <div className="tweetbox-title">
@@ -86,7 +93,8 @@ const Tweetbox = () => {
       </div>
       
       <div className="tweetbox">
-        <Avatar src="twee" sx={{ width: 60, height: 60 }} />
+        <Avatar src="/cover1.jpeg" sx={{ width: 60, height: 60 }}
+        onclick={handleAvatarClick}/>
         <input
           value={content}
           onChange={(e) => setContent(e.target.value)}

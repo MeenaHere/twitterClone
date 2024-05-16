@@ -7,6 +7,7 @@ import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import LandingPage from "./components/landingPage/LandingPage";
 import HomePage from "./components/home/HomePage";
+import LogoutConfirmationModal from "./components/logout/Logout";
 // import ProfileCopy from "./components/profile/ProfileCopy";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<LogoutConfirmationModal />} />
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/users/:id" element={<Profile />} />
         <Route path="/users/:id/followers/" element={<Followers />} />

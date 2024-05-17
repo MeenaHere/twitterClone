@@ -94,7 +94,7 @@ const Tweetbox = () => {
       
       <div className="tweetbox">
         <Avatar src="/cover1.jpeg" sx={{ width: 60, height: 60 }}
-        onclick={handleAvatarClick}/>
+        onClick={handleAvatarClick}/>
         <input
           value={content}
           onChange={(e) => setContent(e.target.value)}

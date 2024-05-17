@@ -1,4 +1,6 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
+<<<<<<< HEAD
 /* import TweetBox from "./TweetBox"; */
 import "../Feed/Feed.css";
 import axios from "axios";
@@ -6,6 +8,14 @@ import { FiSettings } from "react-icons/fi";
 import Post from "../Feed/Post";
 import Tweetbox from "../Tweet/Tweetbox";
 /* import Tweetbox from "../Tweetbox"; */
+=======
+import "./Feed.css";
+import axios from "axios";
+import { FiSettings } from "react-icons/fi";
+import Post from "./Post";
+import Tweetbox from "../Tweet/Tweetbox";
+
+>>>>>>> 602e16198c86bfd2981ee9525df281d4b4d89a25
 
 function Feed() {
     const [posts, setPosts] = useState([]);

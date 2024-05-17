@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Profile from "./components/profile/Profile";

@@ -10,6 +10,7 @@ import ProfileButton from "./ProfileButton.jsx";
 import LogoutConfirmationModal from "../logout/Logout.jsx";
 import { ownTweets } from "../../tweetServices.js";
 
+// eslint-disable-next-line react/prop-types
 function ProfileInfo({ setTweetComponentVisibility }) {
   const [user, setUser] = useState([]);
   const [followers, setFollowers] = useState([]);

@@ -5,7 +5,7 @@ import axios from "axios";
 import { FiSettings } from "react-icons/fi";
 import Post from "./Post";
 import CreatePost from "./CreatePost";
-import Tweetbox from "../Tweetbox";
+import Tweetbox from "../Tweet/Tweetbox";
 /* import Tweetbox from "../Tweetbox"; */
 
 function Feed() {
@@ -13,7 +13,7 @@ function Feed() {
 
     useEffect(() => {
         axios
-            .get("http://localhost:4000/posts")
+            .get("http://localhost:4000/tweets")
             .then((response) => {
                 console.log("Post response:", response.data);
 

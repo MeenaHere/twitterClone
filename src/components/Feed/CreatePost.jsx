@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import Avatar from "@mui/material/Avatar";
 import { deepPurple } from "@mui/material/colors";
-import AuthContext from "../../AuthContext";
+
 
 
 
@@ -12,7 +12,7 @@ axios.defaults.withCredentials = true;
 function CreatePost() {
     const [content, setContent] = useState("");
     const [status, setStatus] = useState("");
-    const { auth } = useContext(AuthContext);
+
 
     const handleInputChange = (event) => {
         setContent(event.target.value);

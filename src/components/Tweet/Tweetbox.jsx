@@ -10,16 +10,16 @@ import BallotOutlinedIcon from '@mui/icons-material/BallotOutlined';
 import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
-import './Tweetbox.css';  
+import './Tweetbox.css';
 
 
 const BlueFolderOpenIcon = styled(SourceOutlinedIcon)({
-  color: blue[500], 
+  color: blue[500],
 });
 
 const GifIconComponent = styled(GifBoxOutlinedIcon)({
   color: blue[500],
-}); 
+});
 
 const BallotIconComponent = styled(BallotOutlinedIcon)({
   color: blue[500],
@@ -48,7 +48,7 @@ const Tweetbox = () => {
     const userId = localStorage.getItem('userId');
     const username = localStorage.getItem('username');
 
-   
+
 
     if (!userId || !username) {
       console.error('User is not logged in');
@@ -67,7 +67,7 @@ const Tweetbox = () => {
       });
 
       console.log(response.data);
-      
+
       setContent('');
     } catch (error) {
       console.error('Error creating tweet:', error);
@@ -81,10 +81,10 @@ const Tweetbox = () => {
 
   return (
     <div className="tweetbox-container">
-      <div className="tweetbox-title">
+      {/*   <div className="tweetbox-title">
         <h2>Home</h2>
-      </div>
-      
+      </div> */}
+
       <div className="tweetbox">
         <Avatar src="Public/photo.jpg" sx={{ width: 60, height: 60 }} />
         <input
@@ -94,10 +94,10 @@ const Tweetbox = () => {
           type="text"
         />
       </div>
-      <div className="tweetbox-line">
+      {/*     <div className="tweetbox-line">
         <hr />
       </div>
-
+ */}
       <div className="tweetbox-footer">
         <div className="tweetbox-footer">
           <BlueFolderOpenIcon />
@@ -110,10 +110,10 @@ const Tweetbox = () => {
         <div>
           <button className="t-button" type="submit" onClick={handleSubmit}>Tweet</button>
         </div>
-        </div>
-      
+      </div>
+
     </div>
   );
-} 
+}
 
 export default Tweetbox;

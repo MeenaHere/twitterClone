@@ -1,19 +1,18 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
-/* import TweetBox from "./TweetBox"; */
 import "./Feed.css";
 import axios from "axios";
 import { FiSettings } from "react-icons/fi";
 import Post from "./Post";
-import CreatePost from "./CreatePost";
 import Tweetbox from "../Tweet/Tweetbox";
-/* import Tweetbox from "../Tweetbox"; */
+
 
 function Feed() {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
         axios
-            .get("http://localhost:4000/tweets")
+            .get("http://localhost:4000/posts")
             .then((response) => {
                 console.log("Post response:", response.data);
 
@@ -24,6 +23,14 @@ function Feed() {
             });
     }, []);
 
+    const fetchPosts = async () => {
+        try {
+            const response = await axios.get('http://localhost:4000/posts');
+            setPosts(response.data);
+        } catch (error) {
+            console.error('Error fetching posts:', error);
+        }
+    };
     return (
         <div className="feed">
             <div className="feed-header">
@@ -42,7 +49,9 @@ function Feed() {
             </div>
 
             <div>
-                {posts && posts.map((post) => <Post key={post._id} post={post} />)}
+                {posts.map(post => (
+                    <Post key={post._id} post={post} fetchPosts={fetchPosts} />
+                ))}
             </div>
         </div>
     );

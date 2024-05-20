@@ -7,7 +7,7 @@
 body {
     font-family: Arial, sans-serif;
     /* Use a modern font */
-    background-color: #f5f8fa;
+    background-color: #F5F8FA;
     /* Light blue background, similar to Twitter's */
     padding: 20px;
 }
@@ -26,13 +26,13 @@ body {
 
 }
 
-/* .home-page {
+/* .home-page{
     background: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 500px;
-    margin: 20px auto;
+    margin: 20px auto; 
 } */
 
 .tweetbox-title {
@@ -51,6 +51,7 @@ body {
     margin-left: 1em;
     margin-bottom: 80px;
     margin-top: 30px;
+    background-color: #F5F8FA;
 
 }
 

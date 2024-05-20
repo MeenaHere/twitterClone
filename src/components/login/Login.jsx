@@ -33,7 +33,7 @@ const Login = () => {
 
       if (response.status === 200) {
         console.log("Login successful");
-        const userId = response.data.userId;
+        const userId = response.data._id;
         console.log("userId", userId);
         localStorage.setItem("userId", userId); // Get user ID from response (if applicable)
         navigate(`/homepage`); // Redirect to the user's profile page

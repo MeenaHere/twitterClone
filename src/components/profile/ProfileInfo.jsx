@@ -17,7 +17,6 @@ function ProfileInfo({ setTweetComponentVisibility }) {
   const [date, setDate] = useState("");
   const [showButton, setShowButton] = useState(false);
   const [Tweet, setTweet] = useState([]);
-  const [showModal, setShowModal] = useState(false);
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -25,25 +24,6 @@ function ProfileInfo({ setTweetComponentVisibility }) {
 
   const loggedInUserId = localStorage.getItem("userId"); //fetching userId from the local storage which one stored during login and signup
 
-  const handleLogout = () => {
-    setShowModal(true); // Show the modal when "Logout" is clicked
-  };
-
-  const confirmLogout = async () => {
-    setShowModal(false); // Hide the modal before making the request
-    try {
-      await axios.post("/logout"); // Send the logout request to the backend
-      navigate("/"); // Redirect to the landing page on successful logout
-    } catch (error) {
-      console.error("Error during logout:", error);
-      alert("Logout failed. Please try again.");
-    }
-  };
-
-  const cancelLogout = () => {
-    setShowModal(false); // Hide the modal when canceled
-  };
-  
   useEffect(() => {
     setShowButton(id === loggedInUserId);
     setTweetComponentVisibility(true)
@@ -209,11 +189,7 @@ function ProfileInfo({ setTweetComponentVisibility }) {
           </Row>
         </Row>
         <Row>
-          <LogoutConfirmationModal
-        show={showModal}
-        onConfirm={confirmLogout}
-        onCancel={cancelLogout}
-      />
+          <LogoutConfirmationModal />
         </Row>
       </Container>
     );

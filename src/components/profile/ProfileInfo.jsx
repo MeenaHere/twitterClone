@@ -209,13 +209,13 @@ function ProfileInfo({ setTweetComponentVisibility }) {
             </Col>
           </Row>
         </Row>
-        <Row>
+      
           <LogoutConfirmationModal
         show={showModal}
         onConfirm={confirmLogout}
         onCancel={cancelLogout}
       />
-        </Row>
+       
       </Container>
     );
   } else {

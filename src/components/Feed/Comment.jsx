@@ -73,6 +73,7 @@ function CommentForm({ postId, onCommentSubmit }) {
 
             />
             <button className='feed-btn' onClick={handleSubmit}>Post</button>
+
         </form>
     );
 }

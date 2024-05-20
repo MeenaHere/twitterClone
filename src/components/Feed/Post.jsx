@@ -8,6 +8,7 @@ import { FiHeart } from "react-icons/fi";
 import Avatar from '@mui/material/Avatar';
 import { deepPurple } from '@mui/material/colors';
 
+
 function Post({ post, fetchPosts }) {
     const [profilePhoto, setProfilePhoto] = useState(null);
     const [addComment, setAddComment] = useState(false);
@@ -58,6 +59,23 @@ function Post({ post, fetchPosts }) {
         setShowComments(!showComments);
     };
 
+    const handleDeleteComment = async (commentId) => {
+        try {
+            await axios.delete(`http://localhost:4000/comment/${commentId}`);
+            fetchComments(); // Refresh comments after deletion
+        } catch (error) {
+            console.error('Error deleting comment:', error);
+        }
+    };
+
+    const handleDeleteReply = async (commentId, replyId) => {
+        try {
+            await axios.delete(`http://localhost:4000/comment/${commentId}/reply/${replyId}`);
+            fetchComments(); // Refresh comments after deletion
+        } catch (error) {
+            console.error('Error deleting reply:', error);
+        }
+    };
     return (
         <div className='container-post'>
             <div className="post-card">
@@ -94,12 +112,18 @@ function Post({ post, fetchPosts }) {
                     {comments.map((comment) => (
                         <div className='comment' key={comment._id}>
                             <p>@{comment.userId.username}</p>
-                            <p>{comment.content}</p>
+
+                            <p>
+                                {comment.content}
+                                <button className='del-btn' onClick={() => handleDeleteComment(comment._id)}>x</button>
+                            </p>
                             <ReplyForm commentId={comment._id} onReplySubmit={handleReplySubmit} />
                             {comment.reply && comment.reply.map(reply => (
                                 <div className='reply' key={reply._id}>
                                     <p>@{reply.userId.username}</p>
-                                    <p>{reply.content}</p>
+                                    <p>{reply.content}
+                                        <button className='del-btn' onClick={() => handleDeleteReply(comment._id, reply._id)}>x</button>
+                                    </p>
                                 </div>
                             ))}
                         </div>

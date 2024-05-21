@@ -96,7 +96,7 @@ const Tweetbox = () => {
   };
 
   const handleAvatarClick = () => {
-    navigate('/users/:id');
+    navigate(`/users/${userId}`);
   };
 
   return (

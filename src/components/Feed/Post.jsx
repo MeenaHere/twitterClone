@@ -47,6 +47,24 @@ function Post({ post, fetchPosts }) {
         await fetchComments();
     };
 
+    const handleDeleteComment = async (commentId) => {
+        try {
+            await axios.delete(`http://localhost:4000/comment/${commentId}`);
+            fetchComments(); // Refresh comments after deletion
+        } catch (error) {
+            console.error('Error deleting comment:', error);
+        }
+    };
+
+    const handleDeleteReply = async (commentId, replyId) => {
+        try {
+            await axios.delete(`http://localhost:4000/comment/${commentId}/reply/${replyId}`);
+            fetchComments(); // Refresh comments after deletion
+        } catch (error) {
+            console.error('Error deleting reply:', error);
+        }
+    };
+
     const createdAt = new Date(post.createdAt);
     const date = createdAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
@@ -94,12 +112,18 @@ function Post({ post, fetchPosts }) {
                     {comments.map((comment) => (
                         <div className='comment' key={comment._id}>
                             <p>@{comment.userId.username}</p>
-                            <p>{comment.content}</p>
+
+                            <p>
+                                {comment.content}
+                                <button className='del-btn' onClick={() => handleDeleteComment(comment._id)}>x</button>
+                            </p>
                             <ReplyForm commentId={comment._id} onReplySubmit={handleReplySubmit} />
                             {comment.reply && comment.reply.map(reply => (
                                 <div className='reply' key={reply._id}>
                                     <p>@{reply.userId.username}</p>
-                                    <p>{reply.content}</p>
+                                    <p>{reply.content}
+                                        <button className='del-btn' onClick={() => handleDeleteReply(comment._id, reply._id)}>x</button>
+                                    </p>
                                 </div>
                             ))}
                         </div>

@@ -233,3 +233,16 @@ textarea {
 .icon {
     margin-right: 10px;
 }
+
+.del-btn {
+    transform: translateY(-2px);
+    padding: 0px 10px 2px 10px;
+    margin-left: 30px;
+    border: none;
+    /*   border: 0.2px solid rgba(29, 156, 240, 0.491); */
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    color: rgba(29, 156, 240, 0.491);
+    font-weight: 700;
+    font-size: 14px;
+}

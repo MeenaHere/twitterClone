@@ -45,7 +45,7 @@ axios.defaults.withCredentials = true;
 
 const Tweetbox = () => {
   const [content, setContent] = useState('');
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   const userId = localStorage.getItem('userId');
@@ -121,12 +121,12 @@ const Tweetbox = () => {
  */}
       <div className="tweetbox-footer">
         <div className="tweetbox-footer">
-          <BlueFolderOpenIcon />
-          <GifIconComponent />
-          <BallotIconComponent />
-          <EmojiIconComponent />
-          <EventIconComponent />
-          <GoodIconComponent />
+          <BlueFolderOpenIcon className="icon" />
+          <GifIconComponent className="icon" />
+          <BallotIconComponent className="icon" />
+          <EmojiIconComponent className="icon" />
+          <EventIconComponent className="icon" />
+          <GoodIconComponent className="icon" />
         </div>
         <div>
           <button className="t-button" type="submit" onClick={handleSubmit}>Tweet</button>

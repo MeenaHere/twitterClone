@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import "./Feed.css";
 import axios from "axios";
@@ -42,21 +41,17 @@ function Feed() {
             <div className="create-post-container">
                 <Tweetbox />
             </div>
-
             <div>
-                {posts.length > 0 ? (
-                    posts.map(post => (
-                        <Post key={post._id} post={post} fetchPosts={() => fetchPostsFromFollowedUsers(userId)} />
-                    ))
-                ) : (
-                    <p>No posts from followed users.</p>
-                )}
+                {posts.map(post => (
+                    <Post key={post._id} post={post} fetchPosts={() => fetchPostsFromFollowedUsers(userId)} />
+                ))}
             </div>
         </div>
     );
 }
 
 export default Feed;
+
 
 
 

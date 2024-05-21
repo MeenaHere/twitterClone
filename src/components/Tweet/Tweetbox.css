@@ -42,16 +42,18 @@ body {
 .tweetbox {
     display: flex;
     align-items: center;
+    margin-left: 10px;
 }
 
 .tweetbox>input {
     border: none;
     outline: none;
+    background: none;
     font-size: 1.2rem;
     margin-left: 1em;
-    margin-bottom: 80px;
+    margin-bottom: 40px;
     margin-top: 30px;
-    background-color: #F5F8FA;
+    /*  background-color: #ffffff; */
 
 }
 

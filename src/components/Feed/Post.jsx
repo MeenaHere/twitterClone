@@ -6,14 +6,15 @@ import { FaRegComment } from "react-icons/fa";
 import { AiOutlineRetweet } from "react-icons/ai";
 import { FiHeart } from "react-icons/fi";
 import Avatar from '@mui/material/Avatar';
+import { useNavigate } from 'react-router-dom';
 import { deepPurple } from '@mui/material/colors';
-
 
 function Post({ post, fetchPosts }) {
     const [profilePhoto, setProfilePhoto] = useState(null);
     const [addComment, setAddComment] = useState(false);
     const [showComments, setShowComments] = useState(false);
     const [comments, setComments] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchProfilePhoto();
@@ -32,7 +33,7 @@ function Post({ post, fetchPosts }) {
 
     const fetchComments = async () => {
         try {
-            const response = await axios.get(`http://localhost:4000/comment/${post._id}`);
+            const response = await axios.get(`http://localhost:4000/tweets/${post._id}`);
             setComments(response.data);
         } catch (error) {
             console.error('Error fetching comments:', error);
@@ -42,6 +43,7 @@ function Post({ post, fetchPosts }) {
     const handleCommentSubmit = async () => {
         await fetchComments();
         setAddComment(false);
+        fetchPosts(); // Update the parent component to reflect changes
     };
 
     const handleReplySubmit = async () => {
@@ -52,6 +54,7 @@ function Post({ post, fetchPosts }) {
         try {
             await axios.delete(`http://localhost:4000/comment/${commentId}`);
             fetchComments(); // Refresh comments after deletion
+            fetchPosts(); // Update the parent component to reflect changes
         } catch (error) {
             console.error('Error deleting comment:', error);
         }
@@ -66,6 +69,10 @@ function Post({ post, fetchPosts }) {
         }
     };
 
+    const handleAvatarClick = () => {
+        navigate(`/users/${post.userId._id}`);
+    };
+
     const createdAt = new Date(post.createdAt);
     const date = createdAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
@@ -77,14 +84,13 @@ function Post({ post, fetchPosts }) {
         setShowComments(!showComments);
     };
 
-
     return (
         <div className='container-post'>
             <div className="post-card">
                 <div className="post-content">
                     <div className='post-info'>
-                        <Avatar sx={{ bgcolor: deepPurple[500] }}>
-                            {post.userId && post.userId.fullName ? post.userId.fullName.split(' ')[0].charAt(0) : ''}
+                        <Avatar sx={{ bgcolor: deepPurple[500] }} onClick={handleAvatarClick}>
+                            {post.userId && post.userId.fullName ? post.userId.fullName.split(' ')[0].charAt(0).toUpperCase() : ''}
                         </Avatar>
                         <p>{post.userId && post.userId.username ? `@${post.userId.username}` : '@username'}</p>
                         <p> &#8226;</p>
@@ -98,7 +104,7 @@ function Post({ post, fetchPosts }) {
                         <span>
                             <FaRegComment className='comment-icon' onClick={toggleAddComment} />
                             <span className="num">
-                                {post.comments && post.comments.length}
+                                {comments.length}
                             </span>
                         </span>
                         <AiOutlineRetweet className='comment-icon' />
@@ -114,7 +120,6 @@ function Post({ post, fetchPosts }) {
                     {comments.map((comment) => (
                         <div className='comment' key={comment._id}>
                             <p>@{comment.userId.username}</p>
-
                             <p>
                                 {comment.content}
                                 <button className='del-btn' onClick={() => handleDeleteComment(comment._id)}>x</button>
@@ -137,7 +142,6 @@ function Post({ post, fetchPosts }) {
 }
 
 export default Post;
-
 
 
 

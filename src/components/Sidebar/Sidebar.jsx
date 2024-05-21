@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Sidebar.css'
 import SidebarProps from './SidebarProps';
-import CreatePost from '../Feed/CreatePost';
+/* import CreatePost from '../Feed/CreatePost'; */
 
 import { BsTwitterX } from "react-icons/bs";
 import { PiHouse } from "react-icons/pi";
@@ -21,6 +21,7 @@ import { IoPeopleOutline } from "react-icons/io5";
 import { IoPeople } from "react-icons/io5";
 import { RiFileListLine } from "react-icons/ri";
 import { RiFileList2Fill } from "react-icons/ri";
+import Tweetbox from '../Tweet/Tweetbox';
 
 
 
@@ -114,7 +115,7 @@ function Sidebar() {
             </button>
             {showCreatePost && (
                 <div className="post-middle">
-                    <CreatePost />
+                    <Tweetbox />
                 </div>
             )}
             <div className="current-user">

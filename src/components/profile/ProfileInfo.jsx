@@ -7,7 +7,6 @@ import {
   getOneUser,
 } from "../../userServices.js";
 import ProfileButton from "./ProfileButton.jsx";
-import LogoutConfirmationModal from "../logout/Logout.jsx";
 import { ownTweets } from "../../tweetServices.js";
 
 // eslint-disable-next-line react/prop-types
@@ -26,24 +25,8 @@ function ProfileInfo({ setTweetComponentVisibility }) {
 
   const loggedInUserId = localStorage.getItem("userId"); //fetching userId from the local storage which one stored during login and signup
 
-  const handleLogout = () => {
-    setShowModal(true); // Show the modal when "Logout" is clicked
-  };
-
-  const confirmLogout = async () => {
-    setShowModal(false); // Hide the modal before making the request
-    try {
-      await axios.post("/logout"); // Send the logout request to the backend
-      navigate("/"); // Redirect to the landing page on successful logout
-    } catch (error) {
-      console.error("Error during logout:", error);
-      alert("Logout failed. Please try again.");
-    }
-  };
-
-  const cancelLogout = () => {
-    setShowModal(false); // Hide the modal when canceled
-  };
+  
+  
   
   useEffect(() => {
     setShowButton(id === loggedInUserId);
@@ -209,13 +192,9 @@ function ProfileInfo({ setTweetComponentVisibility }) {
             </Col>
           </Row>
         </Row>
-        <Row>
-          <LogoutConfirmationModal
-        show={showModal}
-        onConfirm={confirmLogout}
-        onCancel={cancelLogout}
-      />
-        </Row>
+      
+          
+       
       </Container>
     );
   } else {

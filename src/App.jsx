@@ -21,8 +21,6 @@ function App() {
         <Route path="/logout" element={<LogoutConfirmationModal />} />
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/users/:id" element={<Profile />} />
-        <Route path="/logout" element={<LogoutConfirmationModal />} />
-
         <Route path="/users/:id/followers/" element={<Followers />} />
         <Route path="/users/:id/following/" element={<Following />} />
       </Routes>

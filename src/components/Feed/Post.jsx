@@ -8,6 +8,7 @@ import { FiHeart } from "react-icons/fi";
 import Avatar from '@mui/material/Avatar';
 import { deepPurple } from '@mui/material/colors';
 
+
 function Post({ post, fetchPosts }) {
     const [profilePhoto, setProfilePhoto] = useState(null);
     const [addComment, setAddComment] = useState(false);
@@ -75,6 +76,7 @@ function Post({ post, fetchPosts }) {
     const toggleShowComments = () => {
         setShowComments(!showComments);
     };
+
 
     return (
         <div className='container-post'>

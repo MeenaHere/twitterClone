@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 // eslint-disable-next-line no-unused-vars
 import { useNavigate } from 'react-router-dom';
@@ -66,6 +66,8 @@ const Tweetbox = () => {
 
   // Function to create a tweet
   const createTweet = async () => {
+    const userId = localStorage.getItem('userId');
+
     if (!userId) {
       console.error('User is not logged in');
       return;
@@ -74,7 +76,7 @@ const Tweetbox = () => {
     try {
       const response = await axios.post('tweets/create', {
         userId: userId,
-        username: user.username,
+        username: username,
         content: content,
       }, {
         headers: {

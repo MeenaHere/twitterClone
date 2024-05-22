@@ -7,8 +7,8 @@ import {
   getOneUser,
 } from "../../userServices.js";
 import ProfileButton from "./ProfileButton.jsx";
-import LogoutConfirmationModal from "../logout/Logout.jsx";
 import { ownTweets } from "../../tweetServices.js";
+
 
 // eslint-disable-next-line react/prop-types
 function ProfileInfo({ setTweetComponentVisibility }) {
@@ -18,12 +18,17 @@ function ProfileInfo({ setTweetComponentVisibility }) {
   const [date, setDate] = useState("");
   const [showButton, setShowButton] = useState(false);
   const [Tweet, setTweet] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const { id } = useParams();
   const navigate = useNavigate();
   console.log(id);
 
   const loggedInUserId = localStorage.getItem("userId"); //fetching userId from the local storage which one stored during login and signup
+
+
+
+
 
   useEffect(() => {
     setShowButton(id === loggedInUserId);
@@ -189,9 +194,12 @@ function ProfileInfo({ setTweetComponentVisibility }) {
             </Col>
           </Row>
         </Row>
-        <Row>
+        {/*  <Row>
           <LogoutConfirmationModal />
         </Row>
+
+ */}
+
       </Container>
     );
   } else {

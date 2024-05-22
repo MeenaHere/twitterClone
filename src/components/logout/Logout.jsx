@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 
 const LogoutConfirmationModal = ({ show, onConfirm, onCancel }) => {
+  // Initialize isButtonClicked to false by default
   const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   const handleConfirm = () => {
@@ -16,13 +17,10 @@ const LogoutConfirmationModal = ({ show, onConfirm, onCancel }) => {
       </Modal.Header>
       <Modal.Body>Are you sure you want to log out?</Modal.Body>
       <Modal.Footer>
-        <Button
-          
-          variant="secondary"
-          onClick={onCancel}
-        >
+        <Button variant="secondary" onClick={onCancel}>
           Cancel
         </Button>
+        {/* Use conditional rendering to set the variant and color of the logout button */}
         <Button
           variant={isButtonClicked ? "dark" : "light"}
           onClick={handleConfirm}

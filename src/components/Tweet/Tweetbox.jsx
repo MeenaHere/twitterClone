@@ -76,7 +76,7 @@ const Tweetbox = () => {
     try {
       const response = await axios.post('tweets/create', {
         userId: userId,
-        username: username,
+        username: user.username,
         content: content,
       }, {
         headers: {

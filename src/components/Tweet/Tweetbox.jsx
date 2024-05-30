@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 // eslint-disable-next-line no-unused-vars
 import { useNavigate } from 'react-router-dom';
@@ -12,16 +12,17 @@ import BallotOutlinedIcon from '@mui/icons-material/BallotOutlined';
 import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
-import './Tweetbox.css';  
+import './Tweetbox.css';
+import { getOneUser } from "../../userServices";
 
 
 const BlueFolderOpenIcon = styled(SourceOutlinedIcon)({
-  color: blue[500], 
+  color: blue[500],
 });
 
 const GifIconComponent = styled(GifBoxOutlinedIcon)({
   color: blue[500],
-}); 
+});
 
 const BallotIconComponent = styled(BallotOutlinedIcon)({
   color: blue[500],
@@ -44,16 +45,30 @@ axios.defaults.withCredentials = true;
 
 const Tweetbox = () => {
   const [content, setContent] = useState('');
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
+  const userId = localStorage.getItem('userId');
+
+  //get a user data from db by using loggedInUserId
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const dbuser = await getOneUser(userId);
+        setUser(dbuser);
+        console.log("user", dbuser);
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    };
+    fetchData();
+  }, [userId]);
 
   // Function to create a tweet
   const createTweet = async () => {
     const userId = localStorage.getItem('userId');
-    const username = localStorage.getItem('username');
 
-   
-
-    if (!userId || !username) {
+    if (!userId) {
       console.error('User is not logged in');
       return;
     }
@@ -61,7 +76,7 @@ const Tweetbox = () => {
     try {
       const response = await axios.post('tweets/create', {
         userId: userId,
-        username: username,
+        username: user.username,
         content: content,
       }, {
         headers: {
@@ -70,7 +85,7 @@ const Tweetbox = () => {
       });
 
       console.log(response.data);
-      
+
       setContent('');
     } catch (error) {
       console.error('Error creating tweet:', error);
@@ -83,18 +98,18 @@ const Tweetbox = () => {
   };
 
   const handleAvatarClick = () => {
-    navigate('/users/:id');
+    navigate(`/users/${userId}`);
   };
 
   return (
     <div className="tweetbox-container">
-      <div className="tweetbox-title">
+      {/*   <div className="tweetbox-title">
         <h2>Home</h2>
-      </div>
-      
+      </div> */}
+
       <div className="tweetbox">
         <Avatar src="/cover1.jpeg" sx={{ width: 60, height: 60 }}
-        onClick={handleAvatarClick}/>
+          onClick={handleAvatarClick} />
         <input
           value={content}
           onChange={(e) => setContent(e.target.value)}
@@ -102,26 +117,26 @@ const Tweetbox = () => {
           type="text"
         />
       </div>
-      <div className="tweetbox-line">
+      {/*     <div className="tweetbox-line">
         <hr />
       </div>
-
+ */}
       <div className="tweetbox-footer">
         <div className="tweetbox-footer">
-          <BlueFolderOpenIcon />
-          <GifIconComponent />
-          <BallotIconComponent />
-          <EmojiIconComponent />
-          <EventIconComponent />
-          <GoodIconComponent />
+          <BlueFolderOpenIcon className="icon" />
+          <GifIconComponent className="icon" />
+          <BallotIconComponent className="icon" />
+          <EmojiIconComponent className="icon" />
+          <EventIconComponent className="icon" />
+          <GoodIconComponent className="icon" />
         </div>
         <div>
           <button className="t-button" type="submit" onClick={handleSubmit}>Tweet</button>
         </div>
-        </div>
-      
+      </div>
+
     </div>
   );
-} 
+}
 
 export default Tweetbox;

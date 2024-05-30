@@ -7,6 +7,7 @@ import { deepPurple } from "@mui/material/colors";
 
 
 
+
 /* axios.defaults.baseURL = "http://localhost:4000"; */
 axios.defaults.withCredentials = true;
 
@@ -14,6 +15,7 @@ function CreatePost() {
     const [content, setContent] = useState("");
     const [status, setStatus] = useState("");
     // const { auth } = useContext(AuthContext);
+
 
     const handleInputChange = (event) => {
         setContent(event.target.value);

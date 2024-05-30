@@ -24,9 +24,30 @@
   font-size: 20rem;
   font-family: "Roboto", sans-serif;
   font-weight: 900;
-  margin: auto;
-  padding-left: 5rem;
 }
+
+.twitter_logo.left_side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.twitter_logo.left_side .twitter_icon {
+  font-size: 20rem;
+}
+
+@media (max-width: 768px) {
+  .twitter_logo.left_side .twitter_icon {
+    font-size: 15rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .twitter_logo.left_side .twitter_icon {
+    font-size: 10rem;
+  }
+}
+
 h1 h2 h3 .twitter_logo {
   color: rgb(15, 20, 25);
 }

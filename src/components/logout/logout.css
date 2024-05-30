@@ -1,0 +1,21 @@
+.btn-white-outline-dark {
+  color: #343a40;
+  background-color: white;
+  border: 1px solid #343a40;
+}
+
+.btn-white-outline-dark:hover {
+  color: white;
+  background-color: #343a40;
+}
+.logout-btn {
+  font-family: "Roboto";
+  font-size: 15px;
+  line-height: 30px;
+  font-weight: 600;
+  color: rgb(15, 20, 25);
+  border-radius: 5px;
+  margin: 5px;
+  width: 250px !important;
+ 
+}

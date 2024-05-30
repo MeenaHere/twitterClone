@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Sidebar.css'
 import SidebarProps from './SidebarProps';
-import CreatePost from '../Feed/CreatePost';
+/* import CreatePost from '../Feed/CreatePost'; */
 
 import { BsTwitterX } from "react-icons/bs";
 import { PiHouse } from "react-icons/pi";
@@ -21,6 +21,7 @@ import { IoPeopleOutline } from "react-icons/io5";
 import { IoPeople } from "react-icons/io5";
 import { RiFileListLine } from "react-icons/ri";
 import { RiFileList2Fill } from "react-icons/ri";
+import Tweetbox from '../Tweet/Tweetbox';
 
 
 
@@ -29,7 +30,7 @@ function Sidebar() {
     const [showCreatePost, setShowCreatePost] = useState(false);
     const [showOverlay, setShowOverlay] = useState(false);
 
-    const loggedInUserId = localStorage.getItem("userId");
+    const userId = localStorage.getItem("userId");
 
     const handleSectionClick = (section) => {
         setActiveSection(section);
@@ -49,7 +50,7 @@ function Sidebar() {
                 onClick={() => handleSectionClick('Home')}
                 Icon={activeSection === 'Home' ? PiHouseFill : PiHouse}
                 text="Home"
-                link="/"
+                link="/homepage"
             />
             <SidebarProps
                 active={activeSection === 'Explore'}
@@ -98,7 +99,7 @@ function Sidebar() {
                 onClick={() => handleSectionClick('Profile')}
                 Icon={activeSection === 'Profile' ? BsPersonFill : BsPerson}
                 text="Profile"
-                link={`/users/${loggedInUserId}`}
+                link={`/users/${userId}`}
             />
             <SidebarProps
                 active={activeSection === 'More'}
@@ -114,7 +115,7 @@ function Sidebar() {
             </button>
             {showCreatePost && (
                 <div className="post-middle">
-                    <CreatePost />
+                    <Tweetbox />
                 </div>
             )}
             <div className="current-user">

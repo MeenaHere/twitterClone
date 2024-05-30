@@ -9,6 +9,8 @@ import {
 import ProfileButton from "./ProfileButton.jsx";
 import { ownTweets } from "../../tweetServices.js";
 
+
+// eslint-disable-next-line react/prop-types
 function ProfileInfo({ setTweetComponentVisibility }) {
   const [user, setUser] = useState([]);
   const [followers, setFollowers] = useState([]);
@@ -16,6 +18,7 @@ function ProfileInfo({ setTweetComponentVisibility }) {
   const [date, setDate] = useState("");
   const [showButton, setShowButton] = useState(false);
   const [Tweet, setTweet] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -23,8 +26,13 @@ function ProfileInfo({ setTweetComponentVisibility }) {
 
   const loggedInUserId = localStorage.getItem("userId"); //fetching userId from the local storage which one stored during login and signup
 
+
+
+
+
   useEffect(() => {
     setShowButton(id === loggedInUserId);
+    setTweetComponentVisibility(true)
   }, [id, loggedInUserId]);
 
   //get a user data from db by using loggedInUserId
@@ -102,7 +110,7 @@ function ProfileInfo({ setTweetComponentVisibility }) {
     return (
       <Container className="mt-1" style={{ textTransform: "capitalize" }}>
         <Row>
-          <Col xs={1} md={1} className="display-2">
+          <Col xs={1} md={1} className="display-4">
             <Link
               className=" text-decoration-none text-dark"
               onClick={handleGoBack}
@@ -110,7 +118,7 @@ function ProfileInfo({ setTweetComponentVisibility }) {
               ←
             </Link>
           </Col>
-          <Col xs={10} md={10} className=" m-3">
+          <Col xs={5} md={10} className="m-2">
             <h4 className="fw-bold">{user.fullName}</h4>
             <p className="small-font">{Tweet.length} Tweets</p>
           </Col>
@@ -186,8 +194,16 @@ function ProfileInfo({ setTweetComponentVisibility }) {
             </Col>
           </Row>
         </Row>
+        {/*  <Row>
+          <LogoutConfirmationModal />
+        </Row>
+
+ */}
+
       </Container>
     );
+  } else {
+    <div>Loading</div>
   }
 }
 

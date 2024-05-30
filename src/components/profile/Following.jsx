@@ -46,9 +46,13 @@ function Following() {
               <li key={following.followingId} className="list-unstyled">
                 <Image
                   src="\cover1.jpeg"
-                  width={70}
-                  height={70}
-                  className="mt-2"
+                  alt="profile photo"
+                  style={{
+                    width: "4rem",
+                    height: "4rem",
+                  }}
+                  roundedCircle
+                  className="border border-white border-4"
                 />
                 <Link
                   to={`/users/${matchedUser._id}`}

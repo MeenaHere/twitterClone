@@ -10,7 +10,7 @@ function SidebarProps({ onClick, active, text, Icon, link }) {
             onClick={onClick}
         >
             <Icon className="sidebar-icon" />
-            <h3>{text}</h3>
+            <h4>{text}</h4>
         </Link>
 
     )

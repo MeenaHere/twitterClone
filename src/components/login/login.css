@@ -1,0 +1,14 @@
+.sign_in_div {
+  font-family: "Roboto";
+  font-size: 31px;
+  line-height: 36px;
+  font-weight: 700;
+}
+.sign_in_btn {
+  color: white;
+  background-color: black;
+  margin-top: 3rem;
+  font-size: 1.2rem;
+
+}
+

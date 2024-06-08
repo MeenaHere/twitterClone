@@ -7,21 +7,32 @@ import {
   getOneUser,
 } from "../../userServices.js";
 import ProfileButton from "./ProfileButton.jsx";
+import { ownTweets } from "../../tweetServices.js";
 
-function ProfileInfo() {
+
+// eslint-disable-next-line react/prop-types
+function ProfileInfo({ setTweetComponentVisibility }) {
   const [user, setUser] = useState([]);
   const [followers, setFollowers] = useState([]);
-  const [following, setfollowing] = useState([]);
+  const [following, setFollowing] = useState([]);
   const [date, setDate] = useState("");
   const [showButton, setShowButton] = useState(false);
+  const [Tweet, setTweet] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const { id } = useParams();
   const navigate = useNavigate();
+  console.log(id);
 
   const loggedInUserId = localStorage.getItem("userId"); //fetching userId from the local storage which one stored during login and signup
 
+
+
+
+
   useEffect(() => {
     setShowButton(id === loggedInUserId);
+    setTweetComponentVisibility(true)
   }, [id, loggedInUserId]);
 
   //get a user data from db by using loggedInUserId
@@ -30,6 +41,7 @@ function ProfileInfo() {
       try {
         const dbuser = await getOneUser(id);
         setUser(dbuser);
+        console.log("user", dbuser);
         const [getDate] = dbuser.createdAt.split("T");
         setDate(getDate);
       } catch (error) {
@@ -57,7 +69,22 @@ function ProfileInfo() {
     const fetchData = async () => {
       try {
         const dbFollowing = await getAllFollowing(id);
-        setfollowing(dbFollowing);
+        setFollowing(dbFollowing);
+        console.log("Following", dbFollowing);
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    };
+    fetchData();
+  }, [id]);
+
+  //get a profile user tweets data from db by using id
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const dbTweets = await ownTweets(id);
+        setTweet(dbTweets);
+        console.log("tweet", dbTweets);
       } catch (error) {
         console.error("Error fetching data", error);
       }
@@ -69,19 +96,31 @@ function ProfileInfo() {
   const isFollowingStatus = followers
     .map((follower) => follower.followerId)
     .includes(loggedInUserId);
+  useEffect(() => {
+    if (isFollowingStatus) {
+      setTweetComponentVisibility(true);
+    }
+  }, [isFollowingStatus, setTweetComponentVisibility]);
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
   if (user !== null) {
     return (
       <Container className="mt-1" style={{ textTransform: "capitalize" }}>
         <Row>
-          <Col xs={1} md={1} className="display-2">
-            <Link to={`/home/`} className=" text-decoration-none text-dark">
+          <Col xs={1} md={1} className="display-4">
+            <Link
+              className=" text-decoration-none text-dark"
+              onClick={handleGoBack}
+            >
               ←
             </Link>
           </Col>
-          <Col xs={10} md={10} className=" m-3">
+          <Col xs={5} md={10} className="m-2">
             <h4 className="fw-bold">{user.fullName}</h4>
-            <p className="small-font">3.1k Tweets</p>
+            <p className="small-font">{Tweet.length} Tweets</p>
           </Col>
         </Row>
         <Row>
@@ -110,6 +149,8 @@ function ProfileInfo() {
               isFollowingStatus={isFollowingStatus}
               loggedInUserId={loggedInUserId}
               showButton={showButton}
+              setTweetComponentVisibility={setTweetComponentVisibility}
+              setFollowers={setFollowers}
             />
           </div>
         </Row>
@@ -153,8 +194,16 @@ function ProfileInfo() {
             </Col>
           </Row>
         </Row>
+        {/*  <Row>
+          <LogoutConfirmationModal />
+        </Row>
+
+ */}
+
       </Container>
     );
+  } else {
+    <div>Loading</div>
   }
 }
 

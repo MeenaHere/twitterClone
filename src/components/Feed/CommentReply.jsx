@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getOneUser } from '../../userServices';
 
-axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.baseURL = "https://x-twitter-clone-react.netlify.app";
 axios.defaults.withCredentials = true;
 
 
@@ -38,7 +38,7 @@ function ReplyForm({ commentId, onReplySubmit }) {
             return;
         }
         try {
-            const response = await axios.post(`http://localhost:4000/comment/${commentId}/reply`, {
+            const response = await axios.post(`https://x-twitter-clone-react.netlify.app/comment/${commentId}/reply`, {
                 userId: userId,
                 content: content,
                 username: user.username,

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./register.css";
 
-axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.baseURL = "https://twitter-clone-backend-jdzg.onrender.com/";
 
 const RegisterUser = () => {
 
@@ -37,7 +37,7 @@ const RegisterUser = () => {
       console.log("Registration successful:", response.data);
 
       if (response.status === 201) {
-        navigate("/login"); // Navigate to the login page upon successful registration
+        navigate("/"); // Navigate to the login page upon successful registration
       }
     } catch (error) {
       const errorMessage =

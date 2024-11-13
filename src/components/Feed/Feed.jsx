@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./Feed.css";
 import axios from "axios";
 import { FiSettings } from "react-icons/fi";
@@ -17,7 +17,7 @@ function Feed() {
 
     const fetchPostsFromFollowedUsers = async (userId) => {
         try {
-            const response = await axios.get(`http://localhost:4000/tweets/followingPosts/${userId}`);
+            const response = await axios.get(`https://x-twitter-clone-react.netlify.app/tweets/followingPosts/${userId}`);
             console.log('Fetched posts from followed users:', response.data);
             setPosts(response.data);
         } catch (error) {

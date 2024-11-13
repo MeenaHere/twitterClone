@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
 import { BsXCircleFill } from "react-icons/bs";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import "./SearchField.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,7 +14,6 @@ function SearchField() {
   const [select, setSelect] = useState(-1);
   const [isSearchActive, setIsSearchActive] = useState(false);
   const navigate = useNavigate();
-  const { id } = useParams();
 
   /*   const UserId = localStorage.setItem("userId", id); */
 
@@ -50,27 +49,11 @@ function SearchField() {
       }
     }
   };
-  /*   useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const dbuser = await getOneUser(id);
-          setUser(dbuser);
-          console.log("user", dbuser);
-          if (dbuser.createdAt) {
-            const [getDate] = dbuser.createdAt.split("T");
-            setDate(getDate);
-          }
-        } catch (error) {
-          console.error("Error fetching data", error);
-        }
-      };
-      fetchData();
-    }, [id]);
-   */
+
 
   useEffect(() => {
     if (query !== "") {
-      fetch(`http://localhost:4000/search?q=${query}`)
+      fetch(`https://twitter-clone-backend-jdzg.onrender.com/search?q=${query}`)
         .then((res) => res.json())
         .then((data) => setSearchData(data))
         .catch((error) => console.error("Error fetching data:", error));
@@ -114,7 +97,7 @@ function SearchField() {
                     onClick={async () => {
                       try {
                         const userResponse = await axios.get(
-                          `http://localhost:4000/users/${data._id}`
+                          `https://twitter-clone-backend-jdzg.onrender.com/users/${data._id}`
                         );
                         const userData = userResponse.data;
                         navigate(`/users/${userData._id}`);
@@ -142,35 +125,3 @@ function SearchField() {
 }
 
 export default SearchField;
-
-
-// Notes: Don't forget to change to my own backend api
-// just a reference
-/* useEffect(() => {
-    if (query !== "") {
-        fetch(`/api/search?q=${query}`)
-            .then(res => res.json())
-            .then(data => {
-                // Handle response data from your API
-                setSearchData(data); // Assuming data is an array of user objects
-            })
-            .catch(error => console.error('Error fetching data:', error));
-    }
-}, [query]); */
-
-// Other code i might want to use
-
-/*  const handleSearch = async () => {
-     try {
-         
-         const response = await fetch(`/api/search?query=${query}`);
-         if (!response.ok) {
-             throw new Error('Failed to fetch search results');
-         }
-         const data = await response.json();
-         setSearchResults(data); // Update search results state
-     } catch (error) {
-         console.error('Error searching:', error);
-         setSearchResults([]); // Clear search results on error
-     }
- }; */

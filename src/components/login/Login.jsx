@@ -6,7 +6,7 @@ import "./PasswordPage";
 import "./UsernamePage";
 
 // Set the default base URL for axios requests
-axios.defaults.baseURL = "http://localhost:4000";
+const url = "https://twitter-clone-backend-jdzg.onrender.com/";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -25,7 +25,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/login", {
+      const response = await axios.post(`${url}login`, {
         username,
         password,
         // Send username and password to the backend
@@ -46,6 +46,9 @@ const Login = () => {
       setError(errorMessage); // Display error message to the user
       console.error("Error during login:", errorMessage); // Log the error details
     }
+  };
+    const goToRegister = () => {
+    navigate("/register");
   };
 
   return (
@@ -85,6 +88,14 @@ const Login = () => {
                   Sign in
                 </button>
               </form>
+                        <div className="form_container">
+            <button
+              className="create_account_btn btn btn-primary"
+              onClick={goToRegister}
+            >
+              Create Account
+            </button>
+          </div>
               {error && <p className="text-danger">{error}</p>}{" "}
               {/* Display error message */}
             </div>

@@ -28,7 +28,7 @@ function CreatePost() {
             //     return;
             // }
 
-            const response = await axios.post(`http://localhost:4000/posts/create`, { content });
+            const response = await axios.post(`https://x-twitter-clone-react.netlify.app/posts/create`, { content });
 
             if (response.status === 201) {
                 setStatus("Post created successfully");

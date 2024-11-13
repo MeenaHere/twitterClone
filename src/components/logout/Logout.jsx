@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 
 const LogoutConfirmationModal = ({ show, onConfirm, onCancel }) => {

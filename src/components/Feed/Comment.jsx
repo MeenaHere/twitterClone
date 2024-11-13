@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getOneUser } from '../../userServices';
 
-axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.baseURL = "https://twitter-clone-backend-jdzg.onrender.com";
 axios.defaults.withCredentials = true;
 
 function CommentForm({ postId, onCommentSubmit }) {
@@ -38,7 +38,7 @@ function CommentForm({ postId, onCommentSubmit }) {
             return;
         }
         try {
-            const response = await axios.post(`http://localhost:4000/comment/${postId}`,
+            const response = await axios.post(`https://twitter-clone-backend-jdzg.onrender.com/comment/${postId}`,
                 {
                     userId: userId,
                     username: user.username,
